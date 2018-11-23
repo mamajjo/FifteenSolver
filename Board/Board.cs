@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BoardModel;
 using DataHandler;
 
-namespace Board
+namespace BoardModel
 {
-    class Board
+    public class Board
     {
         byte[,] board;
-        public byte Rows { get; set; }
-        public byte Columns { get; set; }
+
         Cell zeroCell;
+        BoardData boardData { get; set; }
         public Board(BoardData data)
         {
-            board = data.Board;
-            Rows = data.SizeX;
-            Columns = data.SizeY;
+            boardData = data
+                ;
             zeroCell = DetectZeroPosition();
         }
         public Board Shift(MoveEnum moveEnum)
@@ -25,68 +25,87 @@ namespace Board
             switch (moveEnum)
             {
                 case MoveEnum.U:
-                    if (zeroCell.Row == 0)
+                    if (zeroCell.Row == boardData.SizeX)
                     {
-                        return new Board(board);
+                        return new Board(boardData);
                     }
                     else
                     {
-                        byte[][] temp = board;
-                        temp[zeroCell.Row][zeroCell.Column] = board[zeroCell.Row - 1][zeroCell.Column];
-                        temp[zeroCell.Row - 1][zeroCell.Column] = 0;
-                        return new Board(temp);
+                        BoardData tempBoardData = new BoardData() {Board = boardData.Board, SizeX = boardData.SizeX, SizeY = boardData.SizeY};
+                        tempBoardData.Board[zeroCell.Row,zeroCell.Column] = boardData.Board[zeroCell.Row - 1,zeroCell.Column];
+                        tempBoardData.Board[zeroCell.Row - 1,zeroCell.Column] = 0;
+                        return new Board(tempBoardData);
+
                     }
                 case MoveEnum.L:
                     if (zeroCell.Column == 0)
                     {
-                        return new Board(board);
+                        return new Board(boardData);
+
                     }
                     else
                     {
-                        byte[][] temp = board;
-                        temp[zeroCell.Row][zeroCell.Column] = board[zeroCell.Row][zeroCell.Column - 1];
-                        temp[zeroCell.Row][zeroCell.Column - 1] = 0;
-                        return new Board(temp);
+                        BoardData tempBoardData = new BoardData();
+                        tempBoardData = boardData;
+                        tempBoardData.Board[zeroCell.Row,zeroCell.Column] = boardData.Board[zeroCell.Row,zeroCell.Column - 1];
+                        tempBoardData.Board[zeroCell.Row,zeroCell.Column - 1] = 0;
+                        return new Board(tempBoardData);
                     }
                 case MoveEnum.D:
-                    if (zeroCell.Row == 3)
+                    if (zeroCell.Row == boardData.SizeX)
                     {
-                        return new Board(board);
+                        return new Board(boardData);
                     }
                     else
                     {
-                        byte[][] temp = board;
-                        temp[zeroCell.Row][zeroCell.Column] = board[zeroCell.Row + 1][zeroCell.Column];
-                        temp[zeroCell.Row + 1][zeroCell.Column] = 0;
-                        return new Board(temp);
+                        BoardData tempBoardData = new BoardData();
+                        tempBoardData = boardData;
+                        tempBoardData.Board[zeroCell.Row,zeroCell.Column] = boardData.Board[zeroCell.Row + 1,zeroCell.Column];
+                        tempBoardData.Board[zeroCell.Row + 1,zeroCell.Column] = 0;
+                        return new Board(tempBoardData);
+
                     }
                 case MoveEnum.R:
-                    if (zeroCell.Column == 3)
+                    if (zeroCell.Column == boardData.SizeY)
                     {
-                        return new Board(board);
+                        return new Board(boardData);
                     }
                     else
                     {
-                        byte[][] temp = board;
-                        temp[zeroCell.Row][zeroCell.Column] = board[zeroCell.Row][zeroCell.Column + 1];
-                        temp[zeroCell.Row][zeroCell.Column + 1] = 0;
-                        return new Board(temp);
+                        BoardData tempBoardData = new BoardData();
+                        tempBoardData.Board[zeroCell.Row,zeroCell.Column] = boardData.Board[zeroCell.Row,zeroCell.Column + 1];
+                        tempBoardData.Board[zeroCell.Row,zeroCell.Column + 1] = 0;
+                        return new Board(tempBoardData);
+
                     }
                 default:
-                    return new Board(board);
+                        return new Board(boardData); ;
             }
-        }
+        } 
         public Cell DetectZeroPosition()
         {
-            for (byte i = 0; i < Rows; i++)
+            for (byte i = 0; i < boardData.SizeX; i++)
             {
-                for (byte j = 0; j < Columns; j++)
+                for (byte j = 0; j < boardData.SizeY; j++)
                 {
-                    if (board[i][j] == 0)
+                    if (boardData.Board[i,j] == 0)
                         return new Cell(i, j);
                 }
             }
             return null;
+        }
+        public override string ToString()
+        {
+            StringBuilder sB = new StringBuilder();
+            for (byte i = 0; i < boardData.SizeX; i++)
+            {
+                for (byte j = 0; j < boardData.SizeY; j++)
+                {
+                    sB.Append(boardData.Board[i, j] + " ");
+                }
+                sB.Append("\r\n");
+            }
+            return sB.ToString();
         }
     }
 }
