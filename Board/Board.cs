@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataHandler;
 
-namespace BoardModel
+namespace Board
 {
-    public class Board
+    class Board
     {
         byte[,] board;
         public byte Rows { get; set; }
         public byte Columns { get; set; }
         Cell zeroCell;
-        public Board(byte[,] _board)
+        public Board(BoardData data)
         {
-            board = _board;
+            board = data.Board;
+            Rows = data.SizeX;
+            Columns = data.SizeY;
             zeroCell = DetectZeroPosition();
         }
         public Board Shift(MoveEnum moveEnum)
@@ -28,9 +31,9 @@ namespace BoardModel
                     }
                     else
                     {
-                        byte[,] temp = board;
-                        temp[zeroCell.Row,zeroCell.Column] = board[zeroCell.Row - 1,zeroCell.Column];
-                        temp[zeroCell.Row - 1,zeroCell.Column] = 0;
+                        byte[][] temp = board;
+                        temp[zeroCell.Row][zeroCell.Column] = board[zeroCell.Row - 1][zeroCell.Column];
+                        temp[zeroCell.Row - 1][zeroCell.Column] = 0;
                         return new Board(temp);
                     }
                 case MoveEnum.L:
@@ -40,9 +43,9 @@ namespace BoardModel
                     }
                     else
                     {
-                        byte[,] temp = board;
-                        temp[zeroCell.Row,zeroCell.Column] = board[zeroCell.Row,zeroCell.Column - 1];
-                        temp[zeroCell.Row,zeroCell.Column - 1] = 0;
+                        byte[][] temp = board;
+                        temp[zeroCell.Row][zeroCell.Column] = board[zeroCell.Row][zeroCell.Column - 1];
+                        temp[zeroCell.Row][zeroCell.Column - 1] = 0;
                         return new Board(temp);
                     }
                 case MoveEnum.D:
@@ -52,9 +55,9 @@ namespace BoardModel
                     }
                     else
                     {
-                        byte[,] temp = board;
-                        temp[zeroCell.Row,zeroCell.Column] = board[zeroCell.Row + 1,zeroCell.Column];
-                        temp[zeroCell.Row + 1,zeroCell.Column] = 0;
+                        byte[][] temp = board;
+                        temp[zeroCell.Row][zeroCell.Column] = board[zeroCell.Row + 1][zeroCell.Column];
+                        temp[zeroCell.Row + 1][zeroCell.Column] = 0;
                         return new Board(temp);
                     }
                 case MoveEnum.R:
@@ -64,9 +67,9 @@ namespace BoardModel
                     }
                     else
                     {
-                        byte[,] temp = board;
-                        temp[zeroCell.Row,zeroCell.Column] = board[zeroCell.Row,zeroCell.Column + 1];
-                        temp[zeroCell.Row,zeroCell.Column + 1] = 0;
+                        byte[][] temp = board;
+                        temp[zeroCell.Row][zeroCell.Column] = board[zeroCell.Row][zeroCell.Column + 1];
+                        temp[zeroCell.Row][zeroCell.Column + 1] = 0;
                         return new Board(temp);
                     }
                 default:
@@ -79,24 +82,11 @@ namespace BoardModel
             {
                 for (byte j = 0; j < Columns; j++)
                 {
-                    if (board[i,j] == (byte)0)
+                    if (board[i][j] == 0)
                         return new Cell(i, j);
                 }
             }
             return null;
-        }
-        public override string ToString()
-        {
-            StringBuilder stringBuilder = new StringBuilder();
-            for (int i = 0; i < 4; i++)
-            {
-                for (int j = 0; j < 4; j++)
-                {
-                    stringBuilder.Append(board[i,j] + " ");
-                }
-                stringBuilder.Append("\r\n");
-            }
-            return stringBuilder.ToString();
         }
     }
 }
