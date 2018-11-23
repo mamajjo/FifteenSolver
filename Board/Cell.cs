@@ -8,12 +8,18 @@ namespace Board
 {
     class Cell
     {
-        public int R { get; set; }
-        public int C { get; set; }
-        public int Value { get; set; }
-        public Cell(int x, int y, )
+        public byte Row { get; set; }
+        public byte Column { get; set; }
+    
+        public Cell(Cell cellToCopy)
         {
-
+            Row = cellToCopy.Row;
+            Column = cellToCopy.Column;
+        }
+        public Cell(byte r, byte c)
+        {
+            Row = r;
+            Column = c; 
         }
 
     }

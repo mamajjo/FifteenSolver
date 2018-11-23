@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace Board
 {
-    class Board
+    enum MoveEnum
     {
-        List<Cell> board = new List<Cell>();
-        public Board(List<Cell> _board)
-        {
-            board = _board;
-        }
+        L,
+        U,
+        D,
+        R
     }
 }
