@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{05FEE8F4-AB30-43E0-B571-FF0F23591EBA}</ProjectGuid>
+    <ProjectGuid>{3B41F48C-2C93-458A-AAF1-9442118759B6}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>FifteenSolver</RootNamespace>
-    <AssemblyName>FifteenSolver</AssemblyName>
+    <RootNamespace>CLIFifteen</RootNamespace>
+    <AssemblyName>CLIFifteen</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

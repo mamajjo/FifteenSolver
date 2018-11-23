@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Ogólne informacje o zestawie są kontrolowane poprzez następujący 
 // zestaw atrybutów. Zmień wartości tych atrybutów, aby zmodyfikować informacje
 // powiązane z zestawem.
-[assembly: AssemblyTitle("FifteenAlgorythm")]
+[assembly: AssemblyTitle("FifteenSolvers")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("FifteenAlgorythm")]
+[assembly: AssemblyProduct("FifteenSolvers")]
 [assembly: AssemblyCopyright("Copyright ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Następujący identyfikator GUID jest identyfikatorem biblioteki typów w przypadku udostępnienia tego projektu w modelu COM
-[assembly: Guid("3e573682-7f98-42d9-b1e6-c23410d743f9")]
+[assembly: Guid("c07ae4a8-f4c5-450c-8889-2fa141ec6b4a")]
 
 // Informacje o wersji zestawu zawierają następujące cztery wartości:
 //
