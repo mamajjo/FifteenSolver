@@ -5,6 +5,10 @@ VisualStudioVersion = 15.0.28010.2050
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FifteenSolver", "FifteenSolver\FifteenSolver.csproj", "{05FEE8F4-AB30-43E0-B571-FF0F23591EBA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FifteenAlgorythm", "FifteenAlgorythm\FifteenAlgorythm.csproj", "{3E573682-7F98-42D9-B1E6-C23410D743F9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataHandler", "DataHandler\DataHandler.csproj", "{CBB7465E-8DB0-4D8D-9243-2536A702C825}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{05FEE8F4-AB30-43E0-B571-FF0F23591EBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05FEE8F4-AB30-43E0-B571-FF0F23591EBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05FEE8F4-AB30-43E0-B571-FF0F23591EBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E573682-7F98-42D9-B1E6-C23410D743F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E573682-7F98-42D9-B1E6-C23410D743F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E573682-7F98-42D9-B1E6-C23410D743F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E573682-7F98-42D9-B1E6-C23410D743F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBB7465E-8DB0-4D8D-9243-2536A702C825}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBB7465E-8DB0-4D8D-9243-2536A702C825}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBB7465E-8DB0-4D8D-9243-2536A702C825}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBB7465E-8DB0-4D8D-9243-2536A702C825}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

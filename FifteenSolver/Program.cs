@@ -10,6 +10,21 @@ namespace FifteenSolver
     {
         static void Main(string[] args)
         {
+            switch (args.ElementAt(0))
+            {
+                case "bfs":
+
+                    break;
+                case "dfs":
+
+                    break;
+                case "astr":
+
+                    break;
+                default:
+                    break;
+
+            }
         }
     }
 }
