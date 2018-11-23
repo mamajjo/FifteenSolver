@@ -3,18 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataHandler;
 
 namespace Board
 {
     class Board
     {
-        byte[][] board;
+        byte[,] board;
         public byte Rows { get; set; }
         public byte Columns { get; set; }
         Cell zeroCell;
-        public Board(byte[][] _board)
+        public Board(BoardData data)
         {
-            board = _board;
+            board = data.Board;
+            Rows = data.SizeX;
+            Columns = data.SizeY;
             zeroCell = DetectZeroPosition();
         }
         public Board Shift(MoveEnum moveEnum)

@@ -11,7 +11,7 @@ namespace DataHandler
     //klasa układanki i jej stanu string[w][k]
     public class DataLoader
     {
-        public static byte[,] LoadDataFromFile(string path)
+        public static BoardData LoadDataFromFile(string path)
         {
             using (StreamReader sr = new StreamReader(path))
             {
@@ -31,7 +31,7 @@ namespace DataHandler
                     }
                 }
 
-                return board;
+                return new BoardData {Board = board, SizeX = sizeX, SizeY = sizeY};
             }
         }
     }
