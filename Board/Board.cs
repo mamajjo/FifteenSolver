@@ -4,15 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Board
+namespace BoardModel
 {
-    class Board
+    public class Board
     {
-        byte[][] board;
+        byte[,] board;
         public byte Rows { get; set; }
         public byte Columns { get; set; }
         Cell zeroCell;
-        public Board(byte[][] _board)
+        public Board(byte[,] _board)
         {
             board = _board;
             zeroCell = DetectZeroPosition();
@@ -28,9 +28,9 @@ namespace Board
                     }
                     else
                     {
-                        byte[][] temp = board;
-                        temp[zeroCell.Row][zeroCell.Column] = board[zeroCell.Row - 1][zeroCell.Column];
-                        temp[zeroCell.Row - 1][zeroCell.Column] = 0;
+                        byte[,] temp = board;
+                        temp[zeroCell.Row,zeroCell.Column] = board[zeroCell.Row - 1,zeroCell.Column];
+                        temp[zeroCell.Row - 1,zeroCell.Column] = 0;
                         return new Board(temp);
                     }
                 case MoveEnum.L:
@@ -40,9 +40,9 @@ namespace Board
                     }
                     else
                     {
-                        byte[][] temp = board;
-                        temp[zeroCell.Row][zeroCell.Column] = board[zeroCell.Row][zeroCell.Column - 1];
-                        temp[zeroCell.Row][zeroCell.Column - 1] = 0;
+                        byte[,] temp = board;
+                        temp[zeroCell.Row,zeroCell.Column] = board[zeroCell.Row,zeroCell.Column - 1];
+                        temp[zeroCell.Row,zeroCell.Column - 1] = 0;
                         return new Board(temp);
                     }
                 case MoveEnum.D:
@@ -52,9 +52,9 @@ namespace Board
                     }
                     else
                     {
-                        byte[][] temp = board;
-                        temp[zeroCell.Row][zeroCell.Column] = board[zeroCell.Row + 1][zeroCell.Column];
-                        temp[zeroCell.Row + 1][zeroCell.Column] = 0;
+                        byte[,] temp = board;
+                        temp[zeroCell.Row,zeroCell.Column] = board[zeroCell.Row + 1,zeroCell.Column];
+                        temp[zeroCell.Row + 1,zeroCell.Column] = 0;
                         return new Board(temp);
                     }
                 case MoveEnum.R:
@@ -64,9 +64,9 @@ namespace Board
                     }
                     else
                     {
-                        byte[][] temp = board;
-                        temp[zeroCell.Row][zeroCell.Column] = board[zeroCell.Row][zeroCell.Column + 1];
-                        temp[zeroCell.Row][zeroCell.Column + 1] = 0;
+                        byte[,] temp = board;
+                        temp[zeroCell.Row,zeroCell.Column] = board[zeroCell.Row,zeroCell.Column + 1];
+                        temp[zeroCell.Row,zeroCell.Column + 1] = 0;
                         return new Board(temp);
                     }
                 default:
@@ -79,11 +79,24 @@ namespace Board
             {
                 for (byte j = 0; j < Columns; j++)
                 {
-                    if (board[i][j] == 0)
+                    if (board[i,j] == (byte)0)
                         return new Cell(i, j);
                 }
             }
             return null;
+        }
+        public override string ToString()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            for (int i = 0; i < 4; i++)
+            {
+                for (int j = 0; j < 4; j++)
+                {
+                    stringBuilder.Append(board[i,j] + " ");
+                }
+                stringBuilder.Append("\r\n");
+            }
+            return stringBuilder.ToString();
         }
     }
 }

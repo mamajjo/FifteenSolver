@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Board
+namespace BoardModel
 {
-    enum MoveEnum
+    public enum MoveEnum
     {
         L,
         U,

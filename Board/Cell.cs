@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Board
+namespace BoardModel
 {
-    class Cell
+    public class Cell
     {
         public byte Row { get; set; }
         public byte Column { get; set; }
