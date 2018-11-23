@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FifteenSolvers", "FifteenSo
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CLIFifteen", "CLIFifteen\CLIFifteen.csproj", "{3B41F48C-2C93-458A-AAF1-9442118759B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Board", "Board\Board.csproj", "{B4456C7B-6A38-4408-83D1-4EA6D285DFE1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{3B41F48C-2C93-458A-AAF1-9442118759B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B41F48C-2C93-458A-AAF1-9442118759B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B41F48C-2C93-458A-AAF1-9442118759B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B4456C7B-6A38-4408-83D1-4EA6D285DFE1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B4456C7B-6A38-4408-83D1-4EA6D285DFE1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B4456C7B-6A38-4408-83D1-4EA6D285DFE1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B4456C7B-6A38-4408-83D1-4EA6D285DFE1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
