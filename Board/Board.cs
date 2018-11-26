@@ -14,11 +14,11 @@ namespace BoardModel
 
         Cell zeroCell;
         BoardData boardData { get; set; }
-        public Board(BoardData data)
+        List<MoveEnum> moveEnums = new List<MoveEnum>();
+        MoveEnum lastMove = new MoveEnum();
+        public Board(int sizeX, int sizeY, byte[,] board, MoveEnum lastMove, Board parent)
         {
-            boardData = data
-                ;
-            zeroCell = DetectZeroPosition();
+            
         }
         public Board Shift(MoveEnum moveEnum)
         {
@@ -34,6 +34,7 @@ namespace BoardModel
                         BoardData tempBoardData = new BoardData() {Board = boardData.Board, SizeX = boardData.SizeX, SizeY = boardData.SizeY};
                         tempBoardData.Board[zeroCell.Row,zeroCell.Column] = boardData.Board[zeroCell.Row - 1,zeroCell.Column];
                         tempBoardData.Board[zeroCell.Row - 1,zeroCell.Column] = 0;
+                        lastMove = MoveEnum.U;
                         return new Board(tempBoardData);
 
                     }
@@ -49,6 +50,7 @@ namespace BoardModel
                         tempBoardData = boardData;
                         tempBoardData.Board[zeroCell.Row,zeroCell.Column] = boardData.Board[zeroCell.Row,zeroCell.Column - 1];
                         tempBoardData.Board[zeroCell.Row,zeroCell.Column - 1] = 0;
+                        lastMove = MoveEnum.L;
                         return new Board(tempBoardData);
                     }
                 case MoveEnum.D:
@@ -62,6 +64,7 @@ namespace BoardModel
                         tempBoardData = boardData;
                         tempBoardData.Board[zeroCell.Row,zeroCell.Column] = boardData.Board[zeroCell.Row + 1,zeroCell.Column];
                         tempBoardData.Board[zeroCell.Row + 1,zeroCell.Column] = 0;
+                        lastMove = MoveEnum.D;
                         return new Board(tempBoardData);
 
                     }
@@ -75,8 +78,8 @@ namespace BoardModel
                         BoardData tempBoardData = new BoardData();
                         tempBoardData.Board[zeroCell.Row,zeroCell.Column] = boardData.Board[zeroCell.Row,zeroCell.Column + 1];
                         tempBoardData.Board[zeroCell.Row,zeroCell.Column + 1] = 0;
+                        lastMove = MoveEnum.R;
                         return new Board(tempBoardData);
-
                     }
                 default:
                         return new Board(boardData); ;
@@ -106,6 +109,11 @@ namespace BoardModel
                 sB.Append("\r\n");
             }
             return sB.ToString();
+        }
+        public List<MoveEnum> GetAllowedMoves()
+        {
+            List<MoveEnum> allowedMoves = new List<MoveEnum>();
+
         }
     }
 }
