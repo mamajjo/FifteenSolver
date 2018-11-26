@@ -14,8 +14,9 @@ namespace BoardModel
 
         Cell zeroCell;
         BoardData boardData { get; set; }
-        List<MoveEnum> moveEnums = new List<MoveEnum>();
+        Queue<MoveEnum> moveEnums = new Queue<MoveEnum>();
         MoveEnum lastMove = new MoveEnum();
+        public List<MoveEnum> PathToSolution { get; set; }
         Board _parent;
         public Board(int sizeX, int sizeY, byte[,] board, Board parent)
         {
@@ -24,7 +25,7 @@ namespace BoardModel
             boardData.Board = board;
             _parent = parent;
         }
-        public Board(BoardData bD, Board parent)
+        public Board(BoardData bD, MoveEnum[] moveOrder, Board parent)
         {
             boardData = bD;
             _parent = parent;
@@ -44,7 +45,7 @@ namespace BoardModel
                         tempBoardData.Board[zeroCell.Row,zeroCell.Column] = boardData.Board[zeroCell.Row - 1,zeroCell.Column];
                         tempBoardData.Board[zeroCell.Row - 1,zeroCell.Column] = 0;
                         lastMove = MoveEnum.U;
-                        return new Board(tempBoardData, this);
+                        return new Board(tempBoardData, moveOrder,this);
 
                     }
                 case MoveEnum.L:
@@ -119,10 +120,31 @@ namespace BoardModel
             }
             return sB.ToString();
         }
-        public List<MoveEnum> GetAllowedMoves()
+        //should data reference to cli program? if not then change static moveOrder -> passable
+        public List<MoveEnum> GetAllowedMoves(MoveEnum[] moveOrder)
         {
             List<MoveEnum> allowedMoves = new List<MoveEnum>();
-
+            for (int i = 0; i < 4; i++)
+            {
+                if (moveOrder[i] == MoveEnum.D && zeroCell.Column == boardData.SizeX && PathToSolution.Last() == MoveEnum.U)
+                {
+                    continue;
+                }
+                if (moveOrder[i] == MoveEnum.U && zeroCell.Column == 0 && PathToSolution.Last() == MoveEnum.D)
+                {
+                    continue;
+                }
+                if (moveOrder[i] == MoveEnum.L && zeroCell.Column == 0 && PathToSolution.Last() == MoveEnum.L)
+                {
+                    continue;
+                }
+                if (moveOrder[i] == MoveEnum.R && zeroCell.Column == boardData.SizeY && PathToSolution.Last() == MoveEnum.R)
+                {
+                    continue;
+                }
+                allowedMoves.Add(moveOrder[i]);
+            }
+            return allowedMoves;
         }
     }
 }

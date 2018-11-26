@@ -10,10 +10,11 @@ namespace CLIFifteen
 {
     class Program
     {
-        public static Queue<MoveEnum> givenMoveOrder = new Queue<MoveEnum>();
+        public MoveEnum[] givenMoveOrder;
         static void Main(string[] args)
         {
-            Board testingBoard = new Board(DataLoader.LoadDataFromFile("C:\\Users\\Maciej\\source\\repos\\FifteenSolver\\UnitTests\\testBoard.txt"));
+            Board testingBoard = new Board(DataLoader.LoadDataFromFile("C:\\Users\\Maciej\\source\\repos\\FifteenSolver\\UnitTests\\testBoard.txt"), GivenMoveOrder(args[1]), null);
+
             Console.WriteLine(testingBoard.ToString());
 
             testingBoard.Shift(MoveEnum.U);
@@ -28,33 +29,33 @@ namespace CLIFifteen
             }
             Console.ReadKey();
         }
-        Queue<MoveEnum> GivenMoveOrder(string moveOrder)
+        private static MoveEnum[] GivenMoveOrder(string moveOrder)
         {
             if (moveOrder.Length != 4)
                 throw new ArgumentException("Given move order must contain 4 letters");
-            Queue<MoveEnum> moveOrderQueue = new Queue<MoveEnum>();
+            MoveEnum[] moveOrderArray = new MoveEnum[4];
             char letter;
             for (int i = 0; i < 4; i++)
             {
                 letter = moveOrder.ElementAt(i);
                 if (letter == 'U' || letter == 'u')
                 {
-                    moveOrderQueue.Enqueue(MoveEnum.U);
+                    moveOrderArray[i] = MoveEnum.U;
                 }
                 else if (letter == 'D' || letter == 'd')
                 {
-                    moveOrderQueue.Enqueue(MoveEnum.D);
+                    moveOrderArray[i] = MoveEnum.D;
                 }
                 else if (letter == 'R' || letter == 'r')
                 {
-                    moveOrderQueue.Enqueue(MoveEnum.R);
+                    moveOrderArray[i] = MoveEnum.R;
                 }
                 else if (letter == 'L' || letter == 'l')
                 {
-                    moveOrderQueue.Enqueue(MoveEnum.L);
+                    moveOrderArray[i] = MoveEnum.L;
                 }
             }
-            return moveOrderQueue;
+            return moveOrderArray;
         }
     }
 }
