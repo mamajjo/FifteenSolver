@@ -16,6 +16,7 @@ namespace UnitTests
             MoveEnum[] testPriority = {MoveEnum.L, MoveEnum.D, MoveEnum.R, MoveEnum.U};
             Board expectedBoard = new Board(4, 4, expectedBytes);
             DFSSolver testSolver = new DFSSolver(expectedBoard, testPriority);
+            testSolver.Solve();
             testSolver.SolvedBoard.IsSolved().Should().BeTrue();
         }
     }
