@@ -30,6 +30,8 @@ namespace CLIFifteen
         }
         Queue<MoveEnum> GivenMoveOrder(string moveOrder)
         {
+            if (moveOrder.Length != 4)
+                throw new ArgumentException("Given move order must contain 4 letters");
             Queue<MoveEnum> moveOrderQueue = new Queue<MoveEnum>();
             char letter;
             for (int i = 0; i < 4; i++)

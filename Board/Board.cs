@@ -16,9 +16,18 @@ namespace BoardModel
         BoardData boardData { get; set; }
         List<MoveEnum> moveEnums = new List<MoveEnum>();
         MoveEnum lastMove = new MoveEnum();
-        public Board(int sizeX, int sizeY, byte[,] board, MoveEnum lastMove, Board parent)
+        Board _parent;
+        public Board(int sizeX, int sizeY, byte[,] board, Board parent)
         {
-            
+            boardData.SizeX = (byte)sizeX;
+            boardData.SizeY = (byte)sizeY;
+            boardData.Board = board;
+            _parent = parent;
+        }
+        public Board(BoardData bD, Board parent)
+        {
+            boardData = bD;
+            _parent = parent;
         }
         public Board Shift(MoveEnum moveEnum)
         {
@@ -27,7 +36,7 @@ namespace BoardModel
                 case MoveEnum.U:
                     if (zeroCell.Row == boardData.SizeX)
                     {
-                        return new Board(boardData);
+                        return this;
                     }
                     else
                     {
@@ -35,13 +44,13 @@ namespace BoardModel
                         tempBoardData.Board[zeroCell.Row,zeroCell.Column] = boardData.Board[zeroCell.Row - 1,zeroCell.Column];
                         tempBoardData.Board[zeroCell.Row - 1,zeroCell.Column] = 0;
                         lastMove = MoveEnum.U;
-                        return new Board(tempBoardData);
+                        return new Board(tempBoardData, this);
 
                     }
                 case MoveEnum.L:
                     if (zeroCell.Column == 0)
                     {
-                        return new Board(boardData);
+                        return this;
 
                     }
                     else
@@ -51,12 +60,12 @@ namespace BoardModel
                         tempBoardData.Board[zeroCell.Row,zeroCell.Column] = boardData.Board[zeroCell.Row,zeroCell.Column - 1];
                         tempBoardData.Board[zeroCell.Row,zeroCell.Column - 1] = 0;
                         lastMove = MoveEnum.L;
-                        return new Board(tempBoardData);
+                        return new Board(tempBoardData, this);
                     }
                 case MoveEnum.D:
                     if (zeroCell.Row == boardData.SizeX)
                     {
-                        return new Board(boardData);
+                        return this;
                     }
                     else
                     {
@@ -65,13 +74,13 @@ namespace BoardModel
                         tempBoardData.Board[zeroCell.Row,zeroCell.Column] = boardData.Board[zeroCell.Row + 1,zeroCell.Column];
                         tempBoardData.Board[zeroCell.Row + 1,zeroCell.Column] = 0;
                         lastMove = MoveEnum.D;
-                        return new Board(tempBoardData);
+                        return new Board(tempBoardData, this);
 
                     }
                 case MoveEnum.R:
                     if (zeroCell.Column == boardData.SizeY)
                     {
-                        return new Board(boardData);
+                        return this;
                     }
                     else
                     {
@@ -79,10 +88,10 @@ namespace BoardModel
                         tempBoardData.Board[zeroCell.Row,zeroCell.Column] = boardData.Board[zeroCell.Row,zeroCell.Column + 1];
                         tempBoardData.Board[zeroCell.Row,zeroCell.Column + 1] = 0;
                         lastMove = MoveEnum.R;
-                        return new Board(tempBoardData);
+                        return new Board(tempBoardData, this);
                     }
                 default:
-                        return new Board(boardData); ;
+                        return this;
             }
         } 
         public Cell DetectZeroPosition()
