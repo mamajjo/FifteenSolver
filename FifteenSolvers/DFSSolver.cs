@@ -49,7 +49,7 @@ namespace FifteenSolvers
         {
             if (currentBoard.TreeDepth > 20)
             {
-                BoardsStack.Pop();
+                return;
             }
 
             foreach (var allowedMove in currentBoard.GetAllowedMoves(_moveOrder))

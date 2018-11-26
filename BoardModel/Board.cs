@@ -103,19 +103,19 @@ namespace BoardModel
             List<MoveEnum> allowedMoves = new List<MoveEnum>();
             for (int i = 0; i < 4; i++)
             {
-                if (moveOrder[i] == MoveEnum.D && ZeroCell.Row == (SizeX - 1) || LastMove == MoveEnum.U)
+                if (moveOrder[i] == MoveEnum.D && (ZeroCell.Row == (SizeX - 1) || LastMove == MoveEnum.U))
                 {
                     continue;
                 }
-                if (moveOrder[i] == MoveEnum.U && ZeroCell.Row == 0 || LastMove == MoveEnum.D)
+                if (moveOrder[i] == MoveEnum.U && (ZeroCell.Row == 0 || LastMove == MoveEnum.D))
                 {
                     continue;
                 }
-                if (moveOrder[i] == MoveEnum.L && ZeroCell.Column == 0 || LastMove == MoveEnum.R)
+                if (moveOrder[i] == MoveEnum.L && (ZeroCell.Column == 0 || LastMove == MoveEnum.R))
                 {
                     continue;
                 }
-                if (moveOrder[i] == MoveEnum.R && ZeroCell.Column == (SizeY - 1) || LastMove == MoveEnum.L)
+                if (moveOrder[i] == MoveEnum.R && (ZeroCell.Column == (SizeY - 1) || LastMove == MoveEnum.L))
                 {
                     continue;
                 }
