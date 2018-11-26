@@ -46,7 +46,7 @@
     <Compile Include="Solvers\ISolver.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Board\BoardModel.csproj">
+    <ProjectReference Include="..\BoardModel\BoardModel.csproj">
       <Project>{B4456C7B-6A38-4408-83D1-4EA6D285DFE1}</Project>
       <Name>BoardModel</Name>
     </ProjectReference>

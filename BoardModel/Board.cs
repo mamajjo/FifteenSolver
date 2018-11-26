@@ -95,6 +95,7 @@ namespace BoardModel
             }
             return sB.ToString();
         }
+
         public List<MoveEnum> GetAllowedMoves(MoveEnum[] moveOrder)
         {
             List<MoveEnum> allowedMoves = new List<MoveEnum>();
