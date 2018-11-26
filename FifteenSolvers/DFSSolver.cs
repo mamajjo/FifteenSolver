@@ -32,9 +32,8 @@ namespace FifteenSolvers
             }
         }
 
-        public DFSSolver(Board initBoard, MoveEnum[] moveOrder):base()
+        public DFSSolver(Board initBoard, MoveEnum[] moveOrder) : base(initBoard, moveOrder)
         {
-            _moveOrder = moveOrder;
             MoveOrder = _moveOrder.Reverse().ToArray();     //RLDU
             MaxDepth = 0;
             BoardsStack = new Stack<Board>();
