@@ -35,22 +35,41 @@ namespace BoardModel
             ZeroCell = DetectZeroPosition();
         }
 
-        public void Shift(MoveEnum moveEnum)
+        public Board Shift(MoveEnum moveEnum)
         {
             byte[,] tempBoard = new byte[SizeX, SizeY];
+            byte tempValue = 0;
             Array.Copy(BoardInstance, tempBoard, SizeX * SizeY);
             switch (moveEnum)
             {
                 case MoveEnum.U:
+                    tempValue = tempBoard[ZeroCell.Row - 1, ZeroCell.Column];
+                    tempBoard[ZeroCell.Row - 1, ZeroCell.Column] = 0;
+                    tempBoard[ZeroCell.Row, ZeroCell.Column] = tempValue;
                     break;
+
                 case MoveEnum.L:
+                    tempValue = tempBoard[ZeroCell.Row, ZeroCell.Column - 1];
+                    tempBoard[ZeroCell.Row, ZeroCell.Column - 1] = 0;
+                    tempBoard[ZeroCell.Row, ZeroCell.Column] = tempValue;
                     break;
+
                 case MoveEnum.D:
+                    tempValue = tempBoard[ZeroCell.Row + 1, ZeroCell.Column];
+                    tempBoard[ZeroCell.Row + 1, ZeroCell.Column] = 0;
+                    tempBoard[ZeroCell.Row, ZeroCell.Column] = tempValue;
                     break;
+
                 case MoveEnum.R:
+                    tempValue = tempBoard[ZeroCell.Row, ZeroCell.Column + 1];
+                    tempBoard[ZeroCell.Row, ZeroCell.Column + 1] = 0;
+                    tempBoard[ZeroCell.Row, ZeroCell.Column] = tempValue;
                     break;
             }
+
+            return new Board(SizeX, SizeY, tempBoard, moveEnum, this.PathToSolution);
         } 
+
         public ZeroCell DetectZeroPosition()
         {
             for (byte i = 0; i < SizeX; i++)
