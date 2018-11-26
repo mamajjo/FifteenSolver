@@ -82,18 +82,43 @@ namespace BoardModel
             }
             return null;
         }
-        //public override string ToString()
-        //{
-        //    StringBuilder sB = new StringBuilder();
-        //    for (byte i = 0; i < boardData.SizeX; i++)
-        //    {
-        //        for (byte j = 0; j < boardData.SizeY; j++)
-        //        {
-        //            sB.Append(boardData.Board[i, j] + " ");
-        //        }
-        //        sB.Append("\r\n");
-        //    }
-        //    return sB.ToString();
-        //}
+        public override string ToString()
+        {
+            StringBuilder sB = new StringBuilder();
+            for (byte i = 0; i < SizeX; i++)
+            {
+                for (byte j = 0; j < SizeY; j++)
+                {
+                    sB.Append(BoardInstance[i, j] + " ");
+                }
+                sB.Append("\r\n");
+            }
+            return sB.ToString();
+        }
+        public List<MoveEnum> GetAllowedMoves(MoveEnum[] moveOrder)
+        {
+            List<MoveEnum> allowedMoves = new List<MoveEnum>();
+            for (int i = 0; i < 4; i++)
+            {
+                if (moveOrder[i] == MoveEnum.D && ZeroCell.Column == SizeX && PathToSolution.Last() == MoveEnum.U)
+                {
+                    continue;
+                }
+                if (moveOrder[i] == MoveEnum.U && ZeroCell.Column == 0 && PathToSolution.Last() == MoveEnum.D)
+                {
+                    continue;
+                }
+                if (moveOrder[i] == MoveEnum.L && ZeroCell.Column == 0 && PathToSolution.Last() == MoveEnum.L)
+                {
+                    continue;
+                }
+                if (moveOrder[i] == MoveEnum.R && ZeroCell.Column == SizeY && PathToSolution.Last() == MoveEnum.R)
+                {
+                    continue;
+                }
+                allowedMoves.Add(moveOrder[i]);
+            }
+            return allowedMoves;
+        }
     }
 }
