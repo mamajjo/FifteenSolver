@@ -9,14 +9,13 @@ namespace FifteenSolvers
 {
     public abstract class BaseSolver
     {
-        public IEnumerable<Board> BoardsCollection { get; set; }
         public MoveEnum[] _moveOrder;
-        public abstract bool Solve();
+        public abstract void Solve();
         public BaseSolver()
         {
 
         }
-        public abstract void InitilizeChildrenBoards();
+        public abstract void InitilizeChildrenBoards(Board currentBoard);
 
 
     }
