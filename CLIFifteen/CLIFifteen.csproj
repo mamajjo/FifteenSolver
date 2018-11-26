@@ -50,7 +50,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Board\BoardModel.csproj">
+    <ProjectReference Include="..\BoardModel\BoardModel.csproj">
       <Project>{b4456c7b-6a38-4408-83d1-4ea6d285dfe1}</Project>
       <Name>BoardModel</Name>
     </ProjectReference>

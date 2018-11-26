@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace BoardModel
 {
-    public class Cell
+    public class ZeroCell
     {
         public byte Row { get; set; }
         public byte Column { get; set; }
     
-        public Cell(Cell cellToCopy)
+        public ZeroCell(ZeroCell cellToCopy)
         {
             Row = cellToCopy.Row;
             Column = cellToCopy.Column;
         }
-        public Cell(byte r, byte c)
+        public ZeroCell(byte r, byte c)
         {
             Row = r;
             Column = c; 

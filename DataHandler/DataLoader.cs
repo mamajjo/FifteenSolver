@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using BoardModel;
 
 namespace DataHandler
 {
@@ -11,7 +12,7 @@ namespace DataHandler
     //klasa układanki i jej stanu string[w][k]
     public class DataLoader
     {
-        public static BoardData LoadDataFromFile(string path)
+        public static Board LoadDataFromFile(string path)
         {
             using (StreamReader sr = new StreamReader(path))
             {
@@ -31,7 +32,7 @@ namespace DataHandler
                     }
                 }
 
-                return new BoardData {Board = board, SizeX = sizeX, SizeY = sizeY};
+                return new Board(sizeX, sizeY, board);
             }
         }
     }

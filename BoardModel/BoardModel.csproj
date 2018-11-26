@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{B4456C7B-6A38-4408-83D1-4EA6D285DFE1}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Board</RootNamespace>
-    <AssemblyName>Board</AssemblyName>
+    <RootNamespace>BoardModel</RootNamespace>
+    <AssemblyName>BoardModel</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -53,12 +53,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DataHandler\DataHandler.csproj">
-      <Project>{CBB7465E-8DB0-4D8D-9243-2536A702C825}</Project>
-      <Name>DataHandler</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

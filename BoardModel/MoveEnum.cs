@@ -11,6 +11,7 @@ namespace BoardModel
         L,
         U,
         D,
-        R
+        R,
+        N
     }
 }
