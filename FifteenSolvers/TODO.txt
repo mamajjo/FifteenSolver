@@ -1,0 +1,18 @@
+﻿//TODO - wypisanie kroków rozwiązania ( w ogóle cały "UI" )
+- blokada dalszego przechodzenia ( funkcja hashująca, do funkcji która sprawdza, czy już był taki układ w programie )
+- obliczanie procesu rozwiązujacego progarm
+- najwyższą TreeDepth.Lenght
+
+
+Klasa do zapisywania do pliku stringa:
+     Tworzenie pliku informacyjnego
+(proponuję tak, by łatwo się go w ekscelu otwierało. ( format csv )
+
+     Tworzenie pliku z rozwiązaniem
+
+Zmiana w pętlach 4-> wielkość tablic podawanych z pliku 
+
+stanów odwiedzonych - sprawdzone czy są rozwiązaniem
+liczbę stanów przetworzonych - dodane do stosu
+
+Zmienna przetrzymująca stan najwyższej głębokości. 
