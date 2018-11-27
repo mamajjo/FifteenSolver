@@ -14,7 +14,15 @@ namespace CLIFifteen
         //public static Queue<MoveEnum> givenMoveOrder = new Queue<MoveEnum>();
         static void Main(string[] args)
         {
-            Board testingBoard = new Board(DataLoader.LoadDataFromFile("C:\\Users\\Maciej\\source\\repos\\FifteenSolver\\UnitTests\\testBoard.txt"), new List<MoveEnum>());
+            string[] argss =
+            {
+                @"dsf", @"ldur", @"C:\Users\Maciej\source\repos\FifteenSolver\UnitTests\4x4_01_0001.txt",
+                @"C:\Users\Maciej\source\repos\FifteenSolver\UnitTests\4x4_01_0001_dfs_ludr_sol.txt",
+                @"C:\Users\Maciej\source\repos\FifteenSolver\UnitTests\4x4_01_0001_dfs_ludr_stats.txt"
+            };
+
+            InputArgReader inputArgReader = new InputArgReader(argss);
+            Board testingBoard = new Board(DataLoader.LoadDataFromFile(inputArgReader.InputBoard), new List<MoveEnum>());
             Console.WriteLine(testingBoard.ToString());
             MoveEnum[] lol = {MoveEnum.L, MoveEnum.D, MoveEnum.R, MoveEnum.U};
             BaseSolver solver = new DFSSolver(lol);
@@ -22,7 +30,7 @@ namespace CLIFifteen
             Board solved = solver.Solve();
             Console.WriteLine(solved.ToString());
 
-            DataSaver.SaveText(solver.InformationToFileBuilder.ToString(), @"C:\Users\Maciej\source\repos\FifteenSolver\UnitTests\info.txt");
+            DataSaver.SaveText(solver.InformationToFileBuilder.ToString(), inputArgReader.OutputStats);
             
 
             //testingBoard.Shift(MoveEnum.U);
@@ -37,33 +45,6 @@ namespace CLIFifteen
             //}
             Console.ReadKey();
         }
-        Queue<MoveEnum> GivenMoveOrder(string moveOrder)
-        {
-            if (moveOrder.Length != 4)
-                throw new ArgumentException("Given move order must contain 4 letters");
-            Queue<MoveEnum> moveOrderQueue = new Queue<MoveEnum>();
-            char letter;
-            for (int i = 0; i < 4; i++)
-            {
-                letter = moveOrder.ElementAt(i);
-                if (letter == 'U' || letter == 'u')
-                {
-                    moveOrderQueue.Enqueue(MoveEnum.U);
-                }
-                else if (letter == 'D' || letter == 'd')
-                {
-                    moveOrderQueue.Enqueue(MoveEnum.D);
-                }
-                else if (letter == 'R' || letter == 'r')
-                {
-                    moveOrderQueue.Enqueue(MoveEnum.R);
-                }
-                else if (letter == 'L' || letter == 'l')
-                {
-                    moveOrderQueue.Enqueue(MoveEnum.L);
-                }
-            }
-            return moveOrderQueue;
-        }
+       
     }
 }

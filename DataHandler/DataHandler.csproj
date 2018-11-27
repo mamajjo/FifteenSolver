@@ -44,6 +44,7 @@
     <Compile Include="DataLoader.cs" />
     <Compile Include="DataSaver.cs" />
     <Compile Include="InformationStringBuilder.cs" />
+    <Compile Include="InputArgReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
