@@ -15,7 +15,8 @@ namespace UnitTests
             byte[,] expectedBytes = { { 1, 2, 3, 4 }, { 5, 6, 7, 8 }, { 10, 0, 11, 12 }, { 9, 13, 14, 15 } };
             MoveEnum[] testPriority = {MoveEnum.R, MoveEnum.U, MoveEnum.L, MoveEnum.D};
             Board expectedBoard = new Board(4, 4, expectedBytes);
-            DFSSolver testSolver = new DFSSolver(expectedBoard, testPriority);
+            DFSSolver testSolver = new DFSSolver(testPriority);
+            testSolver.InitializeContainers(expectedBoard);
             testSolver.Solve();
             testSolver.SolvedBoard.IsSolved().Should().BeTrue();
         }

@@ -12,71 +12,13 @@ namespace FifteenSolvers
 {
     public class DFSSolver : BaseSolver
     {
-        public Stack<Board> BoardsStack { get; set; }
-        public HashSet<Board> ProcessedBoards { get; set; }
-        public IEqualityComparer<Board> IBoardsEqualityComparer { get; set; }
-        
-        public MoveEnum[] MoveOrder { get; set; }   //UDLR
-        public Board SolvedBoard { get; set; }
-
-        #region InfoFields
-
-        public List<Board> BoardsVisited = new List<Board>();
-        public int BoardsProcessed { get; set; }
-        public int MaxDepth { get; set; }
-        public InformationStringBuilder InformationToFileBuilder { get; set; }
-
-        #endregion
-
-
-        public override void Solve()
+        public Stack<Board> BoardsStack { get; set; } = new Stack<Board>();
+        public DFSSolver(MoveEnum[] moveOrder)
         {
-            var watch = System.Diagnostics.Stopwatch.StartNew();
-           
-            bool isSolved = false;
-            while (!isSolved)
-            {
-                Board currentBoard = GetNextBoardInStack();
-                if (currentBoard.IsSolved())
-                {
-                    isSolved = true;
-                    SolvedBoard = currentBoard;
-                }
-                else
-                {
-                    InitilizeChildrenBoards(currentBoard);
-                    ProcessedBoards.Add(currentBoard);
-                }
-            }
-            watch.Stop();
-            var elapsedMs = watch.ElapsedMilliseconds;
-            InformationToFileBuilder.FillWithInformation(SolvedBoard.TreeDepth, BoardsVisited.Count, BoardsProcessed, MaxDepth, elapsedMs );
+            MoveOrder = moveOrder.Reverse().ToArray();
         }
 
-        public DFSSolver(Board initBoard, MoveEnum[] moveOrder) : base(initBoard, moveOrder)
-        {
-            MoveOrder = _moveOrder.Reverse().ToArray();     //RLDU
-            InformationToFileBuilder = new InformationStringBuilder();
-            BoardsStack = new Stack<Board>();
-            BoardsStack.Push(initBoard);
-            BoardsProcessed = 1;
-            IBoardsEqualityComparer = new BoardsComparer();
-            ProcessedBoards = new HashSet<Board>(IBoardsEqualityComparer);
-        }
-
-        public Board GetNextBoardInStack()
-        {
-            while (ProcessedBoards.Contains(BoardsStack.Peek()))
-            {
-                BoardsStack.Pop();
-            }
-
-            var temp = BoardsStack.Pop();
-            BoardsVisited.Add(temp);
-            return temp;
-        }
-
-        public override void InitilizeChildrenBoards(Board currentBoard)
+        public override void InitializeChildrenBoards(Board currentBoard)
         {
             if (currentBoard.TreeDepth > MaxDepth)
             {
@@ -87,16 +29,40 @@ namespace FifteenSolvers
                 return;
             }
 
-            foreach (var allowedMove in currentBoard.GetAllowedMoves(_moveOrder))
+            foreach (var allowedMove in currentBoard.GetAllowedMoves(MoveOrder))
             {
                 Board boardToAddToStack = currentBoard.Shift(allowedMove);
 
-                if(ProcessedBoards.Contains(boardToAddToStack))
+                if (VisitedBoards.Contains(boardToAddToStack))
                     continue;
 
                 BoardsStack.Push(boardToAddToStack);
                 BoardsProcessed++;
             }
+        }
+
+        public override Board GetNextBoardInContainer()
+        {
+            while (VisitedBoards.Contains(BoardsStack.Peek()))
+            {
+                BoardsStack.Pop();
+            }
+
+            var temp = BoardsStack.Pop();
+            BoardsVisited.Add(temp);
+            return temp;
+        }
+
+        public override void InitializeContainers(Board initialBoard)
+        {
+            InitBoard = initialBoard;
+            BoardsStack.Push(InitBoard);
+           // VisitedBoards.Add(InitBoard);
+        }
+
+        public override bool IsContainerEmpty()
+        {
+            return (BoardsStack.Count == 0);
         }
     }
 }

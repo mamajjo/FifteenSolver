@@ -17,8 +17,11 @@ namespace CLIFifteen
             Board testingBoard = new Board(DataLoader.LoadDataFromFile("C:\\Users\\Maciej\\source\\repos\\FifteenSolver\\UnitTests\\testBoard.txt"), new List<MoveEnum>());
             Console.WriteLine(testingBoard.ToString());
             MoveEnum[] lol = {MoveEnum.L, MoveEnum.D, MoveEnum.R, MoveEnum.U};
-            DFSSolver solver = new DFSSolver(testingBoard, lol);
-            solver.Solve();
+            BaseSolver solver = new DFSSolver(lol);
+            solver.InitializeContainers(testingBoard);
+            Board solved = solver.Solve();
+            Console.WriteLine(solved.ToString());
+
             DataSaver.SaveText(solver.InformationToFileBuilder.ToString(), @"C:\Users\Maciej\source\repos\FifteenSolver\UnitTests\info.txt");
             
 
