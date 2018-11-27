@@ -37,6 +37,15 @@ namespace BoardModel
             ZeroCell = DetectZeroPosition();
         }
 
+        public Board(Board boardToInject, List<MoveEnum> pathToSolution, MoveEnum lastMove = MoveEnum.N)
+        {
+            SizeX = boardToInject.SizeX;
+            SizeY = boardToInject.SizeY;
+            BoardInstance = boardToInject.BoardInstance;
+            PathToSolution = pathToSolution;
+            ZeroCell = DetectZeroPosition();
+        }
+
         public Board Shift(MoveEnum moveEnum)
         {
             byte[,] tempBoard = new byte[SizeX, SizeY];

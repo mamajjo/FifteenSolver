@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using BoardModel;
+using DataHandler;
 using FifteenSolvers.Comparer;
 
 namespace FifteenSolvers
@@ -17,8 +18,21 @@ namespace FifteenSolvers
         
         public MoveEnum[] MoveOrder { get; set; }   //UDLR
         public Board SolvedBoard { get; set; }
+
+        #region InfoFields
+
+        public List<Board> BoardsVisited = new List<Board>();
+        public int BoardsProcessed { get; set; }
+        public int MaxDepth { get; set; }
+        public InformationStringBuilder InformationToFileBuilder { get; set; }
+
+        #endregion
+
+
         public override void Solve()
         {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+           
             bool isSolved = false;
             while (!isSolved)
             {
@@ -31,17 +45,21 @@ namespace FifteenSolvers
                 else
                 {
                     InitilizeChildrenBoards(currentBoard);
-
                     ProcessedBoards.Add(currentBoard);
                 }
             }
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+            InformationToFileBuilder.FillWithInformation(SolvedBoard.TreeDepth, BoardsVisited.Count, BoardsProcessed, MaxDepth, elapsedMs );
         }
 
         public DFSSolver(Board initBoard, MoveEnum[] moveOrder) : base(initBoard, moveOrder)
         {
             MoveOrder = _moveOrder.Reverse().ToArray();     //RLDU
+            InformationToFileBuilder = new InformationStringBuilder();
             BoardsStack = new Stack<Board>();
             BoardsStack.Push(initBoard);
+            BoardsProcessed = 1;
             IBoardsEqualityComparer = new BoardsComparer();
             ProcessedBoards = new HashSet<Board>(IBoardsEqualityComparer);
         }
@@ -53,11 +71,17 @@ namespace FifteenSolvers
                 BoardsStack.Pop();
             }
 
-            return BoardsStack.Pop();
+            var temp = BoardsStack.Pop();
+            BoardsVisited.Add(temp);
+            return temp;
         }
 
         public override void InitilizeChildrenBoards(Board currentBoard)
         {
+            if (currentBoard.TreeDepth > MaxDepth)
+            {
+                MaxDepth = currentBoard.TreeDepth;
+            }
             if (currentBoard.TreeDepth >= 20)
             {
                 return;
@@ -71,6 +95,7 @@ namespace FifteenSolvers
                     continue;
 
                 BoardsStack.Push(boardToAddToStack);
+                BoardsProcessed++;
             }
         }
     }

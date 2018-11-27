@@ -26,14 +26,18 @@ namespace DataHandler
         }
 
 
-        public InformationStringBuilder(string length, string checkedNodes, string generatedNodes, string maximumDepth, float elapsedTime)
+        public InformationStringBuilder()
         {
-            Lenght = length;
-            CheckedNodes = checkedNodes;
-            GeneratedNodes = generatedNodes;
-            MaximumDepth = maximumDepth;
-            ElapsedTime = elapsedTime.ToString();
+        }
 
+        public void FillWithInformation(int length, int checkedNodes, int generatedNodes, int maximumDepth,
+            float elapsedTime)
+        {
+            Lenght = length.ToString();
+            CheckedNodes = checkedNodes.ToString();
+            GeneratedNodes = generatedNodes.ToString();
+            MaximumDepth = maximumDepth.ToString();
+            ElapsedTime = elapsedTime.ToString();
         }
 
         public override string ToString()

@@ -52,6 +52,10 @@
       <Project>{B4456C7B-6A38-4408-83D1-4EA6D285DFE1}</Project>
       <Name>BoardModel</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DataHandler\DataHandler.csproj">
+      <Project>{CBB7465E-8DB0-4D8D-9243-2536A702C825}</Project>
+      <Name>DataHandler</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
