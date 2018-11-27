@@ -5,15 +5,18 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using BoardModel;
+using FifteenSolvers.Comparer;
 
 namespace FifteenSolvers
 {
     public class DFSSolver : BaseSolver
     {
         public Stack<Board> BoardsStack { get; set; }
+        public HashSet<Board> ProcessedBoards { get; set; }
+        public IEqualityComparer<Board> IBoardsEqualityComparer { get; set; }
+        
         public MoveEnum[] MoveOrder { get; set; }   //UDLR
         public Board SolvedBoard { get; set; }
-        public int MaxDepth { get; set; }
         public override void Solve()
         {
             bool isSolved = false;
@@ -28,35 +31,47 @@ namespace FifteenSolvers
                 else
                 {
                     InitilizeChildrenBoards(currentBoard);
+
+                    ProcessedBoards.Add(currentBoard);
                 }
             }
         }
 
-        public DFSSolver(Board initBoard, MoveEnum[] moveOrder):base()
+        public DFSSolver(Board initBoard, MoveEnum[] moveOrder)
         {
             _moveOrder = moveOrder;
             MoveOrder = _moveOrder.Reverse().ToArray();     //RLDU
-            MaxDepth = 0;
             BoardsStack = new Stack<Board>();
             BoardsStack.Push(initBoard);
+            IBoardsEqualityComparer = new BoardsComparer();
+            ProcessedBoards = new HashSet<Board>(IBoardsEqualityComparer);
         }
 
         public Board GetNextBoardInStack()
         {
-           return BoardsStack.Pop();
+            while (ProcessedBoards.Contains(BoardsStack.Peek()))
+            {
+                BoardsStack.Pop();
+            }
+
+            return BoardsStack.Pop();
         }
 
         public override void InitilizeChildrenBoards(Board currentBoard)
         {
-            if (currentBoard.TreeDepth > 20)
+            if (currentBoard.TreeDepth >= 20)
             {
                 return;
             }
 
             foreach (var allowedMove in currentBoard.GetAllowedMoves(_moveOrder))
             {
-                //TODO CHECK CZY OBECNIE DODAWANY PUSH, NIE BYL JUZ KIEDYS SPRAWDZANY
-                BoardsStack.Push(currentBoard.Shift(allowedMove));
+                Board boardToAddToStack = currentBoard.Shift(allowedMove);
+
+                if(ProcessedBoards.Contains(boardToAddToStack))
+                    continue;
+
+                BoardsStack.Push(boardToAddToStack);
             }
         }
     }

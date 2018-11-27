@@ -13,7 +13,7 @@ namespace UnitTests
         public void When_WholeDFSAlgorithmIsDone_ShouldBeOk()
         {
             byte[,] expectedBytes = { { 1, 2, 3, 4 }, { 5, 6, 7, 8 }, { 10, 0, 11, 12 }, { 9, 13, 14, 15 } };
-            MoveEnum[] testPriority = {MoveEnum.L, MoveEnum.D, MoveEnum.R, MoveEnum.U};
+            MoveEnum[] testPriority = {MoveEnum.R, MoveEnum.U, MoveEnum.L, MoveEnum.D};
             Board expectedBoard = new Board(4, 4, expectedBytes);
             DFSSolver testSolver = new DFSSolver(expectedBoard, testPriority);
             testSolver.Solve();

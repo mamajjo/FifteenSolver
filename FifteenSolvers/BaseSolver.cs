@@ -10,6 +10,7 @@ namespace FifteenSolvers
     public abstract class BaseSolver
     {
         public MoveEnum[] _moveOrder;
+
         public abstract void Solve();
         public BaseSolver()
         {

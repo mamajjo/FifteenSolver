@@ -70,32 +70,6 @@ namespace BoardModel
             }
 
             return new Board(SizeX, SizeY, tempBoard, moveEnum, this.PathToSolution);
-        } 
-
-        public ZeroCell DetectZeroPosition()
-        {
-            for (byte i = 0; i < SizeX; i++)
-            {
-                for (byte j = 0; j < SizeY; j++)
-                {
-                    if (BoardInstance[i,j] == 0)
-                        return new ZeroCell(i, j);
-                }
-            }
-            return null;
-        }
-        public override string ToString()
-        {
-            StringBuilder sB = new StringBuilder();
-            for (byte i = 0; i < SizeX; i++)
-            {
-                for (byte j = 0; j < SizeY; j++)
-                {
-                    sB.Append(BoardInstance[i, j] + " ");
-                }
-                sB.Append("\r\n");
-            }
-            return sB.ToString();
         }
 
         public List<MoveEnum> GetAllowedMoves(MoveEnum[] moveOrder)
@@ -127,17 +101,64 @@ namespace BoardModel
         public bool IsSolved()
         {
             int temp = 0;
-            byte[,] correctBoardInstance = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 0}};
+            //byte[,] correctBoardInstance = { { 1, 2, 3, 4 }, { 5, 6, 7, 8 }, { 9, 10, 11, 12 }, { 13, 14, 15, 0 } };
             for (int i = 0; i < SizeX; i++)
             {
                 for (int j = 0; j < SizeY; j++)
                 {
-                    if (BoardInstance[i, j] != correctBoardInstance[i, j])
+                    temp = ((i * SizeX) + j + 1) % (SizeX * SizeY);
+                if (BoardInstance[i, j] != temp)
                         return false;
                 }
             }
 
             return true;
         }
+
+        public ZeroCell DetectZeroPosition()
+        {
+            for (byte i = 0; i < SizeX; i++)
+            {
+                for (byte j = 0; j < SizeY; j++)
+                {
+                    if (BoardInstance[i,j] == 0)
+                        return new ZeroCell(i, j);
+                }
+            }
+            return null;
+        }
+
+        //public bool Equals(Board other)
+        //{
+        //    if (ReferenceEquals(other, null))
+        //        return false;
+        //    if (ReferenceEquals(this, other))
+        //        return true;
+
+        //    return BoardInstance.Equals(other.BoardInstance);
+        //}
+
+        //public override int GetHashCode()
+        //{
+        //    int hashBoardInstance = BoardInstance == null ? 0 : BoardInstance.GetHashCode();
+
+        //    return hashBoardInstance;
+        //}
+
+        public override string ToString()
+        {
+            StringBuilder sB = new StringBuilder();
+            for (byte i = 0; i < SizeX; i++)
+            {
+                for (byte j = 0; j < SizeY; j++)
+                {
+                    sB.Append(BoardInstance[i, j] + " ");
+                }
+                sB.Append("\r\n");
+            }
+            return sB.ToString();
+        }
+
+        
     }
 }
