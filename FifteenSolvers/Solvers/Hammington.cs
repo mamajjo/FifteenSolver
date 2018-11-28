@@ -1,13 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Linq;
 using BoardModel;
+using Priority_Queue;
 
 namespace FifteenSolvers.Solvers
 {
-    public class BFSSolver: BaseSolver
+    public class Hammington : BaseSolver 
     {
-        public Queue<Board> BoardsQueue { get; set; } = new Queue<Board>();
+        public SimplePriorityQueue<Board> BoardsQueue { get; set; } = new SimplePriorityQueue<Board>();
 
-        public BFSSolver(MoveEnum[] moveOrder)
+        public Hammington(MoveEnum[] moveOrder)
         {
             MoveOrder = moveOrder;
         }
@@ -24,19 +26,19 @@ namespace FifteenSolvers.Solvers
 
             foreach (var allowedMove in currentBoard.GetAllowedMoves(MoveOrder))
             {
-                Board boardToAddToEnqueue = currentBoard.Shift(allowedMove);
+                Board boardToEnqueue = currentBoard.Shift(allowedMove);
 
-                if (HashedBoardsSet.Contains(boardToAddToEnqueue))
+                if (HashedBoardsSet.Contains(boardToEnqueue))
                     continue;
 
-                BoardsQueue.Enqueue(boardToAddToEnqueue);
+                BoardsQueue.Enqueue(boardToEnqueue, HeuristicFunction(boardToEnqueue));
                 BoardsProcessed++;
             }
         }
 
         public override Board GetNextBoardInContainer()
         {
-            while (HashedBoardsSet.Contains(BoardsQueue.Peek()))
+            while (HashedBoardsSet.Contains(BoardsQueue.Last()))
             {
                 BoardsQueue.Dequeue();
             }
@@ -49,12 +51,26 @@ namespace FifteenSolvers.Solvers
         public override void InitializeContainers(Board initialBoard)
         {
             InitBoard = initialBoard;
-            BoardsQueue.Enqueue(InitBoard);
+            BoardsQueue.Enqueue(InitBoard, HeuristicFunction(InitBoard));
         }
 
         public override bool IsContainerEmpty()
         {
             return (BoardsQueue.Count == 0);
+        }
+        private int HeuristicFunction(Board board)
+        {
+            Board boardToCheck = board;
+            int distance = boardToCheck.GetDepthLevel();
+
+            for (int i = 0; i < boardToCheck.SizeX; i++)
+            {
+                for (int j = 0; j < boardToCheck.SizeY; j++)
+                {
+                    distance += boardToCheck.BoardInstance[i, j] != (j + i) * i + 1 ? 1 : 0;
+                }
+            }
+            return distance;
         }
     }
 }

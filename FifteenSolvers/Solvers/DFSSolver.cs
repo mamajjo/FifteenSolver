@@ -33,7 +33,7 @@ namespace FifteenSolvers.Solvers
             {
                 Board boardToAddToStack = currentBoard.Shift(allowedMove);
 
-                if (VisitedBoards.Contains(boardToAddToStack))
+                if (HashedBoardsSet.Contains(boardToAddToStack))
                     continue;
 
                 BoardsStack.Push(boardToAddToStack);
@@ -43,7 +43,7 @@ namespace FifteenSolvers.Solvers
 
         public override Board GetNextBoardInContainer()
         {
-            while (VisitedBoards.Contains(BoardsStack.Peek()))
+            while (HashedBoardsSet.Contains(BoardsStack.Peek()))
             {
                 BoardsStack.Pop();
             }
@@ -57,7 +57,7 @@ namespace FifteenSolvers.Solvers
         {
             InitBoard = initialBoard;
             BoardsStack.Push(InitBoard);
-           // VisitedBoards.Add(InitBoard);
+           // HashedBoardsSet.Add(InitBoard);
         }
 
         public override bool IsContainerEmpty()

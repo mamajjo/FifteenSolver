@@ -11,19 +11,13 @@ namespace DataHandler
     {
         private StringBuilder informationTextBuilder = new StringBuilder();
 
-        public string Lenght { get; set; }
+        public string Length { get; set; }
         public string CheckedNodes { get; set; }
         public string GeneratedNodes { get; set; }
 
         public string MaximumDepth { get; set; }
 
-        private string _elapsedTime;
-
-        public string ElapsedTime
-        {
-            get => _elapsedTime;
-            set => _elapsedTime = value;
-        }
+        public string ElapsedTime { get; set; }
 
 
         public InformationStringBuilder()
@@ -31,9 +25,9 @@ namespace DataHandler
         }
 
         public void FillWithInformation(int length, int checkedNodes, int generatedNodes, int maximumDepth,
-            float elapsedTime)
+            double elapsedTime)
         {
-            Lenght = length.ToString();
+            Length = length.ToString();
             CheckedNodes = checkedNodes.ToString();
             GeneratedNodes = generatedNodes.ToString();
             MaximumDepth = maximumDepth.ToString();
@@ -42,7 +36,7 @@ namespace DataHandler
 
         public override string ToString()
         {
-            informationTextBuilder.AppendLine(Lenght);
+            informationTextBuilder.AppendLine(Length);
             informationTextBuilder.AppendLine(CheckedNodes);
             informationTextBuilder.AppendLine(GeneratedNodes);
             informationTextBuilder.AppendLine(MaximumDepth);

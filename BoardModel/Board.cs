@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Priority_Queue;
 
 namespace BoardModel
 {
@@ -137,6 +138,14 @@ namespace BoardModel
             return null;
         }
 
+        public int GetDepthLevel()
+        {
+            var depthLevel = 0;
+            depthLevel += ZeroCell.Column + 1;
+            depthLevel += ZeroCell.Row + 1;
+            return depthLevel;
+        }
+
         public override string ToString()
         {
             StringBuilder sB = new StringBuilder();
@@ -154,12 +163,11 @@ namespace BoardModel
         public string PathToSolutionString()
         {
             StringBuilder sb = new StringBuilder();
+            sb.AppendLine(PathToSolution.Count.ToString());
             foreach (var move in PathToSolution)
             {
-                sb.AppendLine(move.ToString());
+                sb.Append(move.ToString());
             }
-
-            sb.AppendLine(BoardInstance.BoardToString());
             return sb.ToString();
         }
 
