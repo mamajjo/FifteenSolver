@@ -11,7 +11,6 @@ namespace DataHandler
 {
     public class InputArgReader
     {
-        //program bfs RDUL 4x4_01_0001.txt 4x4_01_0001_bfs_rdul_sol.txt 4x4_01_0001_bfs_rdul_stats.txt
         public List<MoveEnum> MoveEnums= new List<MoveEnum>();
         public string Algorithm { get; set; }
         public string Strategy { get; set; }
@@ -52,6 +51,13 @@ namespace DataHandler
                 }
             }
             return moveOrder;
+        }
+        public string AStarStategy()
+        {
+            if (Strategy.Length != 4)
+                throw new ArgumentException("Given move order must contain 4 letters");
+           
+            return Strategy;
         }
     }
 }

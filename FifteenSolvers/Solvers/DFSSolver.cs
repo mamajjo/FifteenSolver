@@ -8,7 +8,7 @@ using BoardModel;
 using DataHandler;
 using FifteenSolvers.Comparer;
 
-namespace FifteenSolvers
+namespace FifteenSolvers.Solvers
 {
     public class DFSSolver : BaseSolver
     {

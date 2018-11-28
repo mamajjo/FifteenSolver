@@ -137,23 +137,6 @@ namespace BoardModel
             return null;
         }
 
-        //public bool Equals(Board other)
-        //{
-        //    if (ReferenceEquals(other, null))
-        //        return false;
-        //    if (ReferenceEquals(this, other))
-        //        return true;
-
-        //    return BoardInstance.Equals(other.BoardInstance);
-        //}
-
-        //public override int GetHashCode()
-        //{
-        //    int hashBoardInstance = BoardInstance == null ? 0 : BoardInstance.GetHashCode();
-
-        //    return hashBoardInstance;
-        //}
-
         public override string ToString()
         {
             StringBuilder sB = new StringBuilder();
@@ -166,6 +149,18 @@ namespace BoardModel
                 sB.Append("\r\n");
             }
             return sB.ToString();
+        }
+
+        public string PathToSolutionString()
+        {
+            StringBuilder sb = new StringBuilder();
+            foreach (var move in PathToSolution)
+            {
+                sb.AppendLine(move.ToString());
+            }
+
+            sb.AppendLine(BoardInstance.BoardToString());
+            return sb.ToString();
         }
 
         

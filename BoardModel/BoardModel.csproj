@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BoardExtensionMethods.cs" />
     <Compile Include="Cell.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="MoveEnum.cs" />

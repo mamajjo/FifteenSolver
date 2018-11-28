@@ -11,10 +11,7 @@ namespace DataHandler
     {
         public static void SaveText(string dataToSave, string filePath)
         {
-            //if (!File.Exists(filePath))
-            //{
-            //    throw new ArgumentException("Invalid provided filePath");
-            //}
+            //File.Delete(filePath);
             using (StreamWriter sW = File.AppendText(filePath))
             {
                 sW.Write(dataToSave);

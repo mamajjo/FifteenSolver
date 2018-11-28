@@ -23,15 +23,40 @@ namespace CLIFifteen
 
             InputArgReader inputArgReader = new InputArgReader(argss);
             Board testingBoard = new Board(DataLoader.LoadDataFromFile(inputArgReader.InputBoard), new List<MoveEnum>());
-            Console.WriteLine(testingBoard.ToString());
             MoveEnum[] lol = {MoveEnum.L, MoveEnum.D, MoveEnum.R, MoveEnum.U};
             BaseSolver solver = new DFSSolver(lol);
+            
+           
+            
+            //select algorithm depending on input arguments
+            switch (inputArgReader.Algorithm)
+            {
+                case "dfs":
+                    solver = new DFSSolver(lol);
+                    break;
+                case "bfs":
+                    break;
+                case "astr":
+                    switch (inputArgReader.Strategy)
+                    {
+                        case "manh":
+                            break;
+                        case "hamm":
+                            break;
+                            default:
+                                break;
+                                
+                    }
+                    break;
+                default:
+                    break;
+                    
+            }
             solver.InitializeContainers(testingBoard);
             Board solved = solver.Solve();
-            Console.WriteLine(solved.ToString());
-
+            Console.WriteLine(solved.PathToSolutionString());
+            DataSaver.SaveText(solved.PathToSolutionString(), inputArgReader.OutputBoard);
             DataSaver.SaveText(solver.InformationToFileBuilder.ToString(), inputArgReader.OutputStats);
-            
 
             //testingBoard.Shift(MoveEnum.U);
             //Console.WriteLine(testingBoard.ToString());
