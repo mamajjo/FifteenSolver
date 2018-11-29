@@ -20,12 +20,8 @@ namespace FifteenSolvers.Solvers
 
         public override void InitializeChildrenBoards(Board currentBoard)
         {
-            if (currentBoard.TreeDepth > MaxDepth)
-            {
-                MaxDepth = currentBoard.TreeDepth;
-            }
             //smaller than because in TreeDepth first Null is counted
-            if (currentBoard.TreeDepth >= 26)
+            if (currentBoard.TreeDepth >= 20)
             {
                 return;
             }
@@ -50,7 +46,6 @@ namespace FifteenSolvers.Solvers
             }
 
             var temp = BoardsStack.Pop();
-            BoardsVisited.Add(temp);
             return temp;
         }
 

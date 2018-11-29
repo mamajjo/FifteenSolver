@@ -20,7 +20,7 @@ namespace FifteenSolvers
 
         #region InfoFields
 
-        public List<Board> BoardsVisited = new List<Board>();
+        public int BoardsVisited = 0;
         public int BoardsProcessed { get; set; }
         public int MaxDepth { get; set; }
         public InformationStringBuilder InformationToFileBuilder { get; set; }
@@ -40,6 +40,7 @@ namespace FifteenSolvers
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
             //IsContainerEmpty
+            BoardsVisited++;
             CurrentBoard = GetNextBoardInContainer();
             while (!CurrentBoard.IsSolved())
             {
@@ -47,16 +48,24 @@ namespace FifteenSolvers
                 //{
                 //    return new Board(1, 1, gameOverBoard);
                 //}
-                    InitializeChildrenBoards(CurrentBoard);
-                    HashedBoardsSet.Add(CurrentBoard);
-                    CurrentBoard = GetNextBoardInContainer();
+                BoardsVisited++;
+                InitializeChildrenBoards(CurrentBoard);
+                HashedBoardsSet.Add(CurrentBoard);
+                CurrentBoard = GetNextBoardInContainer();
+
+                if (CurrentBoard.TreeDepth >= MaxDepth)
+                {
+                    MaxDepth = CurrentBoard.TreeDepth;
+                }
             }
+
+            BoardsVisited++;
 
             SolvedBoard = CurrentBoard;
             watch.Stop();
             double elapsedMs = watch.ElapsedMilliseconds;
-            InformationToFileBuilder.FillWithInformation(SolvedBoard.TreeDepth-1, BoardsVisited.Count, BoardsProcessed,
-                MaxDepth-1, elapsedMs);
+            InformationToFileBuilder.FillWithInformation(SolvedBoard.TreeDepth, BoardsVisited, BoardsProcessed,
+                MaxDepth, elapsedMs);
             return SolvedBoard;
         }
 

@@ -13,15 +13,6 @@ namespace FifteenSolvers.Solvers
         }
         public override void InitializeChildrenBoards(Board currentBoard)
         {
-            if (currentBoard.TreeDepth > MaxDepth)
-            {
-                MaxDepth = currentBoard.TreeDepth;
-            }
-            if (currentBoard.TreeDepth >= 20)
-            {
-                return;
-            }
-
             foreach (var allowedMove in currentBoard.GetAllowedMoves(MoveOrder))
             {
                 Board boardToAddToEnqueue = currentBoard.Shift(allowedMove);
@@ -42,7 +33,6 @@ namespace FifteenSolvers.Solvers
             }
 
             var temp = BoardsQueue.Dequeue();
-            BoardsVisited.Add(temp);
             return temp;
         }
 

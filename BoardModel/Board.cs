@@ -164,7 +164,6 @@ namespace BoardModel
         public string PathToSolutionString()
         {
             StringBuilder sb = new StringBuilder();
-            PathToSolution.RemoveAt(0);
             sb.AppendLine(PathToSolution.Count.ToString());
             foreach (var move in PathToSolution)
             {

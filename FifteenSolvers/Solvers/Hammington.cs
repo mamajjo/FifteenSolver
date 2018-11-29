@@ -15,15 +15,6 @@ namespace FifteenSolvers.Solvers
         }
         public override void InitializeChildrenBoards(Board currentBoard)
         {
-            if (currentBoard.TreeDepth > MaxDepth)
-            {
-                MaxDepth = currentBoard.TreeDepth;
-            }
-            if (currentBoard.TreeDepth >= 20)
-            {
-                return;
-            }
-
             foreach (var allowedMove in currentBoard.GetAllowedMoves(MoveOrder))
             {
                 Board boardToEnqueue = currentBoard.Shift(allowedMove);
@@ -44,7 +35,6 @@ namespace FifteenSolvers.Solvers
             }
 
             var temp = BoardsQueue.Dequeue();
-            BoardsVisited.Add(temp);
             return temp;
         }
 
@@ -67,7 +57,7 @@ namespace FifteenSolvers.Solvers
             {
                 for (int j = 0; j < boardToCheck.SizeY; j++)
                 {
-                    distance += boardToCheck.BoardInstance[i, j] != (j + i) * i + 1 ? 1 : 0;
+                    distance += (boardToCheck.BoardInstance[i, j] != ((i * boardToCheck.SizeX) + j + 1) % (boardToCheck.SizeX * boardToCheck.SizeY)) ? 1 : 0;
                 }
             }
             return distance;

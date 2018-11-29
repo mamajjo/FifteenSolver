@@ -23,6 +23,7 @@ namespace DataHandler
         public InformationStringBuilder()
         {
             Length = "";
+
             CheckedNodes = "";
 
             GeneratedNodes = "";

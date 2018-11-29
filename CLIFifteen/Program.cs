@@ -23,10 +23,7 @@ namespace CLIFifteen
             //};
 
             InputArgReader inputArgReader = new InputArgReader(args);
-            List<MoveEnum> mE = new List<MoveEnum>();
-            mE.Add(MoveEnum.N);
-            Board testingBoard = new Board(DataLoader.LoadDataFromFile(inputArgReader.InputBoard), mE);
-            testingBoard.LastMove = MoveEnum.N;
+            Board testingBoard = new Board(DataLoader.LoadDataFromFile(inputArgReader.InputBoard), new List<MoveEnum>());
             MoveEnum[] lol = {MoveEnum.L, MoveEnum.D, MoveEnum.R, MoveEnum.U};
             BaseSolver solver = null;
             
