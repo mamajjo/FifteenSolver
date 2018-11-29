@@ -24,7 +24,8 @@ namespace FifteenSolvers.Solvers
             {
                 MaxDepth = currentBoard.TreeDepth;
             }
-            if (currentBoard.TreeDepth >= 20)
+            //smaller than because in TreeDepth first Null is counted
+            if (currentBoard.TreeDepth >= 26)
             {
                 return;
             }

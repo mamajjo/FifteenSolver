@@ -9,6 +9,7 @@ using FifteenSolvers.Comparer;
 
 namespace FifteenSolvers
 {
+
     public abstract class BaseSolver
     {
         public MoveEnum[] MoveOrder { get; set; }
@@ -54,8 +55,8 @@ namespace FifteenSolvers
             SolvedBoard = CurrentBoard;
             watch.Stop();
             double elapsedMs = watch.ElapsedMilliseconds;
-            InformationToFileBuilder.FillWithInformation(SolvedBoard.TreeDepth, BoardsVisited.Count, BoardsProcessed,
-                MaxDepth, elapsedMs);
+            InformationToFileBuilder.FillWithInformation(SolvedBoard.TreeDepth-1, BoardsVisited.Count, BoardsProcessed,
+                MaxDepth-1, elapsedMs);
             return SolvedBoard;
         }
 

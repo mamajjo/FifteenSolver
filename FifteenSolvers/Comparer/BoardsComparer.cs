@@ -29,7 +29,30 @@ namespace FifteenSolvers.Comparer
 
         public int GetHashCode(Board obj)
         {
-            return obj.GetHashCode() * 17;
+            byte[,] state = obj.BoardInstance;
+            if (state == null) return 0;
+            if (state.Length == 0) return -1;
+            unchecked
+            {
+                const int p = 16777619;
+                int hash = (int)2166136261;
+
+                for (int i = 0; i < state.GetLength(0); i++)
+                {
+                    for (int j = 0; j < state.GetLength(1); j++)
+                    {
+                        hash = (hash ^ state[i, j] ^ i ^ j) * p;
+                    }
+                }
+
+                hash += hash << 13;
+                hash ^= hash >> 7;
+                hash += hash << 3;
+                hash ^= hash >> 17;
+                hash += hash << 5;
+
+                return hash;
+            }
         }
     }
 }

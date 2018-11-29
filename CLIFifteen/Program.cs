@@ -61,7 +61,6 @@ namespace CLIFifteen
             }
             solver.InitializeContainers(testingBoard);
             Board solved = solver.Solve();
-            Console.WriteLine(solved.PathToSolutionString());
             DataSaver.SaveText(solved.PathToSolutionString(), inputArgReader.OutputBoard);
             DataSaver.SaveText(solver.InformationToFileBuilder.ToString(), inputArgReader.OutputStats);
         }
