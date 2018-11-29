@@ -12,7 +12,7 @@ namespace BoardModel
         public int SizeX { get; set; }
         public int SizeY { get; set; }
         public byte[,] BoardInstance { get; set; }
-        public MoveEnum LastMove { get; set; }
+        public MoveEnum LastMove { get; set; } = MoveEnum.N;
         public int TreeDepth { get; set; }
         public List<MoveEnum> PathToSolution { get; set; }
         public ZeroCell ZeroCell { get; set; }
@@ -42,6 +42,7 @@ namespace BoardModel
         {
             SizeX = boardToInject.SizeX;
             SizeY = boardToInject.SizeY;
+            LastMove = lastMove;
             BoardInstance = boardToInject.BoardInstance;
             PathToSolution = pathToSolution;
             ZeroCell = DetectZeroPosition();
@@ -163,6 +164,7 @@ namespace BoardModel
         public string PathToSolutionString()
         {
             StringBuilder sb = new StringBuilder();
+            PathToSolution.RemoveAt(0);
             sb.AppendLine(PathToSolution.Count.ToString());
             foreach (var move in PathToSolution)
             {

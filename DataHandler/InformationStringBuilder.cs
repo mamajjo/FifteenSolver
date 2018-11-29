@@ -22,6 +22,15 @@ namespace DataHandler
 
         public InformationStringBuilder()
         {
+            Length = "";
+            CheckedNodes = "";
+
+            GeneratedNodes = "";
+
+            MaximumDepth = "";
+
+            ElapsedTime = "";
+
         }
 
         public void FillWithInformation(int length, int checkedNodes, int generatedNodes, int maximumDepth,

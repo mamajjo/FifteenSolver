@@ -55,8 +55,8 @@ namespace FifteenSolvers.Solvers
 
         public override void InitializeContainers(Board initialBoard)
         {
-            InitBoard = initialBoard;
-            BoardsStack.Push(InitBoard);
+            CurrentBoard = initialBoard;
+            BoardsStack.Push(CurrentBoard);
            // HashedBoardsSet.Add(InitBoard);
         }
 

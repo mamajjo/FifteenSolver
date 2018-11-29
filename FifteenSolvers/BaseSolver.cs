@@ -12,7 +12,7 @@ namespace FifteenSolvers
     public abstract class BaseSolver
     {
         public MoveEnum[] MoveOrder { get; set; }
-        protected Board InitBoard;
+        protected Board CurrentBoard;
         public HashSet<Board> HashedBoardsSet { get; set; }
         public IEqualityComparer<Board> BoardsEqualityComparer { get; set; }
         public Board SolvedBoard { get; set; }
@@ -23,6 +23,7 @@ namespace FifteenSolvers
         public int BoardsProcessed { get; set; }
         public int MaxDepth { get; set; }
         public InformationStringBuilder InformationToFileBuilder { get; set; }
+        private readonly byte[,] gameOverBoard = { { 1 } };
 
         #endregion
 
@@ -37,35 +38,25 @@ namespace FifteenSolvers
         public Board Solve()
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
-
-            bool isSolved = false;
-            double elapsedMs;
             //IsContainerEmpty
-            while (!isSolved)
+            CurrentBoard = GetNextBoardInContainer();
+            while (!CurrentBoard.IsSolved())
             {
-                Board currentBoard = GetNextBoardInContainer();
-                if (currentBoard.IsSolved())
-                {
-                    isSolved = true;
-                    SolvedBoard = currentBoard;
-                    elapsedMs = watch.Elapsed.TotalMilliseconds;
-                    InformationToFileBuilder.FillWithInformation(SolvedBoard.TreeDepth, BoardsVisited.Count,
-                        BoardsProcessed, MaxDepth, elapsedMs);
-                    return SolvedBoard;
-                }
-                else
-                {
-                    InitializeChildrenBoards(currentBoard);
-                    HashedBoardsSet.Add(currentBoard);
-                }
+                //if(IsContainerEmpty())
+                //{
+                //    return new Board(1, 1, gameOverBoard);
+                //}
+                    InitializeChildrenBoards(CurrentBoard);
+                    HashedBoardsSet.Add(CurrentBoard);
+                    CurrentBoard = GetNextBoardInContainer();
             }
 
+            SolvedBoard = CurrentBoard;
             watch.Stop();
-            elapsedMs = watch.ElapsedMilliseconds;
+            double elapsedMs = watch.ElapsedMilliseconds;
             InformationToFileBuilder.FillWithInformation(SolvedBoard.TreeDepth, BoardsVisited.Count, BoardsProcessed,
                 MaxDepth, elapsedMs);
-            byte[,] gameOverBoard = {{1}};
-            return new Board(1, 1, gameOverBoard);
+            return SolvedBoard;
         }
 
         public abstract void InitializeChildrenBoards(Board currentBoard);

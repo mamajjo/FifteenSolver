@@ -50,8 +50,8 @@ namespace FifteenSolvers.Solvers
 
         public override void InitializeContainers(Board initialBoard)
         {
-            InitBoard = initialBoard;
-            BoardsQueue.Enqueue(InitBoard, HeuristicFunction(InitBoard));
+            CurrentBoard = initialBoard;
+            BoardsQueue.Enqueue(CurrentBoard, HeuristicFunction(CurrentBoard));
         }
 
         public override bool IsContainerEmpty()
