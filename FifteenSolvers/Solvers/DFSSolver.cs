@@ -34,6 +34,8 @@ namespace FifteenSolvers.Solvers
 
         public override Board GetNextBoardInContainer()
         {
+            if (BoardsStack.Count == 0)
+                CanNotSolve = -1;
             while (HashedBoardsSet.Contains(BoardsStack.Peek()))
             {
                 BoardsStack.Pop();

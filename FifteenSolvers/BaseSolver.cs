@@ -10,6 +10,7 @@ namespace FifteenSolvers
         public MoveEnum[] MoveOrder { get; set; }
         protected Board CurrentBoard;
         public HashSet<Board> HashedBoardsSet { get; set; }
+        public int CanNotSolve { get; set; }
         public IEqualityComparer<Board> BoardsEqualityComparer { get; set; }
         public Board SolvedBoard { get; set; }
 
@@ -54,8 +55,10 @@ namespace FifteenSolvers
             SolvedBoard = CurrentBoard;
             watch.Stop();
             double elapsedMs = watch.ElapsedMilliseconds;
-            InformationToFileBuilder.FillWithInformation(SolvedBoard.TreeDepth, BoardsVisited, BoardsProcessed,
-                MaxDepth, elapsedMs);
+            if(CanNotSolve != -1)
+                InformationToFileBuilder.FillWithInformation(SolvedBoard.TreeDepth, BoardsVisited, BoardsProcessed,
+                    MaxDepth, elapsedMs);
+
             return SolvedBoard;
         }
 

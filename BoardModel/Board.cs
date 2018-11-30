@@ -108,17 +108,17 @@ namespace BoardModel
 
         public bool IsSolved()
         {
-            for (int i = 0; i < SizeX; i++)
-            {
-                for (int j = 0; j < SizeY; j++)
-                {
-                    int temp = ((i * SizeY) + j + 1) % (SizeX * SizeY);
-                    if (BoardInstance[i, j] != temp)
-                        return false;
-                }
-            }
+            byte[] baData = new byte[BoardInstance.Length];
 
+            Buffer.BlockCopy(BoardInstance, 0, baData, 0, BoardInstance.Length);
+
+            for (int i = 0; i < baData.Length; i++)
+            {
+                if (baData[i] != (i + 1) % baData.Length)
+                    return false;
+            }
             return true;
+
         }
 
         public ZeroCell DetectZeroPosition()
