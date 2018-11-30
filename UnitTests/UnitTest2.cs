@@ -19,5 +19,16 @@ namespace UnitTests
             testSolver.Solve();
             testSolver.SolvedBoard.IsSolved().Should().BeTrue();
         }
+        [TestMethod]
+        public void When_3x3_ShouldBeOk()
+        {
+            byte[,] expectedBytes = { { 1, 2, 3 }, { 4, 0, 5 } };
+            MoveEnum[] testPriority = { MoveEnum.R, MoveEnum.U, MoveEnum.L, MoveEnum.R };
+            Board expectedBoard = new Board(2, 3, expectedBytes);
+            DFSSolver testSolver = new DFSSolver(testPriority);
+            testSolver.InitializeContainers(expectedBoard);
+            testSolver.Solve();
+            testSolver.SolvedBoard.IsSolved().Should().BeTrue();
+        }
     }
 }

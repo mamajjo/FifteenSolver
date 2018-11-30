@@ -112,7 +112,7 @@ namespace BoardModel
             {
                 for (int j = 0; j < SizeY; j++)
                 {
-                    int temp = ((i * SizeX) + j + 1) % (SizeX * SizeY);
+                    int temp = ((i * SizeY) + j + 1) % (SizeX * SizeY);
                     if (BoardInstance[i, j] != temp)
                         return false;
                 }
