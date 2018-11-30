@@ -1,9 +1,9 @@
-﻿using System.Collections.Generic;
-using BoardModel;
+﻿using BoardModel;
+using System.Collections.Generic;
 
 namespace FifteenSolvers.Solvers
 {
-    public class BFSSolver: BaseSolver
+    public class BFSSolver : BaseSolver
     {
         public Queue<Board> BoardsQueue { get; set; } = new Queue<Board>();
 
@@ -11,6 +11,7 @@ namespace FifteenSolvers.Solvers
         {
             MoveOrder = moveOrder;
         }
+
         public override void InitializeChildrenBoards(Board currentBoard)
         {
             foreach (var allowedMove in currentBoard.GetAllowedMoves(MoveOrder))
@@ -40,11 +41,6 @@ namespace FifteenSolvers.Solvers
         {
             CurrentBoard = initialBoard;
             BoardsQueue.Enqueue(CurrentBoard);
-        }
-
-        public override bool IsContainerEmpty()
-        {
-            return (BoardsQueue.Count == 0);
         }
     }
 }

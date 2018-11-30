@@ -46,8 +46,8 @@
   <ItemGroup>
     <Compile Include="BaseSolver.cs" />
     <Compile Include="Comparer\BoardsComparer.cs" />
-    <Compile Include="Solvers\Hammington.cs" />
-    <Compile Include="Solvers\Manhattan.cs" />
+    <Compile Include="Solvers\HammingSolver.cs" />
+    <Compile Include="Solvers\ManhattanSolver.cs" />
     <Compile Include="Solvers\BFSSolver.cs" />
     <Compile Include="Solvers\DFSSolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

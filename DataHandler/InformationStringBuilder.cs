@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Schema;
+﻿using System.Text;
 
 namespace DataHandler
 {
     public class InformationStringBuilder
     {
-        private StringBuilder informationTextBuilder = new StringBuilder();
+        private readonly StringBuilder _informationTextBuilder = new StringBuilder();
 
         public string Length { get; set; }
         public string CheckedNodes { get; set; }
@@ -18,7 +13,6 @@ namespace DataHandler
         public string MaximumDepth { get; set; }
 
         public string ElapsedTime { get; set; }
-
 
         public InformationStringBuilder()
         {
@@ -31,7 +25,6 @@ namespace DataHandler
             MaximumDepth = "";
 
             ElapsedTime = "";
-
         }
 
         public void FillWithInformation(int length, int checkedNodes, int generatedNodes, int maximumDepth,
@@ -46,12 +39,12 @@ namespace DataHandler
 
         public override string ToString()
         {
-            informationTextBuilder.AppendLine(Length);
-            informationTextBuilder.AppendLine(CheckedNodes);
-            informationTextBuilder.AppendLine(GeneratedNodes);
-            informationTextBuilder.AppendLine(MaximumDepth);
-            informationTextBuilder.AppendLine(ElapsedTime);
-            return informationTextBuilder.ToString();
+            _informationTextBuilder.AppendLine(Length);
+            _informationTextBuilder.AppendLine(CheckedNodes);
+            _informationTextBuilder.AppendLine(GeneratedNodes);
+            _informationTextBuilder.AppendLine(MaximumDepth);
+            _informationTextBuilder.AppendLine(ElapsedTime);
+            return _informationTextBuilder.ToString();
         }
     }
 }

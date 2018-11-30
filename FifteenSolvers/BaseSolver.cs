@@ -1,15 +1,10 @@
 ﻿using BoardModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DataHandler;
 using FifteenSolvers.Comparer;
+using System.Collections.Generic;
 
 namespace FifteenSolvers
 {
-
     public abstract class BaseSolver
     {
         public MoveEnum[] MoveOrder { get; set; }
@@ -26,7 +21,7 @@ namespace FifteenSolvers
         public InformationStringBuilder InformationToFileBuilder { get; set; }
         private readonly byte[,] gameOverBoard = { { 1 } };
 
-        #endregion
+        #endregion InfoFields
 
         protected BaseSolver()
         {
@@ -39,15 +34,10 @@ namespace FifteenSolvers
         public Board Solve()
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
-            //IsContainerEmpty
             BoardsVisited++;
             CurrentBoard = GetNextBoardInContainer();
             while (!CurrentBoard.IsSolved())
             {
-                //if(IsContainerEmpty())
-                //{
-                //    return new Board(1, 1, gameOverBoard);
-                //}
                 BoardsVisited++;
                 InitializeChildrenBoards(CurrentBoard);
                 HashedBoardsSet.Add(CurrentBoard);
@@ -70,11 +60,9 @@ namespace FifteenSolvers
         }
 
         public abstract void InitializeChildrenBoards(Board currentBoard);
+
         public abstract Board GetNextBoardInContainer();
+
         public abstract void InitializeContainers(Board initialBoard);
-        public abstract bool IsContainerEmpty();
-
-
-
     }
 }

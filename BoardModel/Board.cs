@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
-using Priority_Queue;
 
 namespace BoardModel
 {
@@ -12,7 +9,7 @@ namespace BoardModel
         public int SizeX { get; set; }
         public int SizeY { get; set; }
         public byte[,] BoardInstance { get; set; }
-        public MoveEnum LastMove { get; set; } = MoveEnum.N;
+        public MoveEnum LastMove { get; set; }
         public int TreeDepth { get; set; }
         public List<MoveEnum> PathToSolution { get; set; }
         public ZeroCell ZeroCell { get; set; }
@@ -23,7 +20,7 @@ namespace BoardModel
             SizeY = sizeY;
             BoardInstance = board;
             LastMove = lastMove;
-            PathToSolution = new List<MoveEnum>(pathToSolution) {lastMove};
+            PathToSolution = new List<MoveEnum>(pathToSolution) { lastMove };
             TreeDepth = PathToSolution.Count;
             ZeroCell = DetectZeroPosition();
         }
@@ -111,14 +108,12 @@ namespace BoardModel
 
         public bool IsSolved()
         {
-            int temp = 0;
-            //byte[,] correctBoardInstance = { { 1, 2, 3, 4 }, { 5, 6, 7, 8 }, { 9, 10, 11, 12 }, { 13, 14, 15, 0 } };
             for (int i = 0; i < SizeX; i++)
             {
                 for (int j = 0; j < SizeY; j++)
                 {
-                    temp = ((i * SizeX) + j + 1) % (SizeX * SizeY);
-                if (BoardInstance[i, j] != temp)
+                    int temp = ((i * SizeX) + j + 1) % (SizeX * SizeY);
+                    if (BoardInstance[i, j] != temp)
                         return false;
                 }
             }
@@ -132,7 +127,7 @@ namespace BoardModel
             {
                 for (byte j = 0; j < SizeY; j++)
                 {
-                    if (BoardInstance[i,j] == 0)
+                    if (BoardInstance[i, j] == 0)
                         return new ZeroCell(i, j);
                 }
             }
@@ -171,7 +166,5 @@ namespace BoardModel
             }
             return sb.ToString();
         }
-
-        
     }
 }

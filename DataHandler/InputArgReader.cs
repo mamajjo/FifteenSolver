@@ -1,17 +1,11 @@
-﻿using System;
-using System.CodeDom;
+﻿using BoardModel;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security;
-using System.Text;
-using System.Threading.Tasks;
-using BoardModel;
 
 namespace DataHandler
 {
     public class InputArgReader
     {
-        public List<MoveEnum> MoveEnums= new List<MoveEnum>();
         public string Algorithm { get; set; }
         public string Strategy { get; set; }
         public string InputBoard { get; set; }
@@ -26,6 +20,7 @@ namespace DataHandler
             OutputBoard = args[3];
             OutputStats = args[4];
         }
+
         public MoveEnum[] GetMoveEnums()
         {
             if (Strategy.Length != 4)
@@ -51,13 +46,6 @@ namespace DataHandler
                 }
             }
             return moveOrder;
-        }
-        public string AStarStategy()
-        {
-            if (Strategy.Length != 4)
-                throw new ArgumentException("Given move order must contain 4 letters");
-           
-            return Strategy;
         }
     }
 }

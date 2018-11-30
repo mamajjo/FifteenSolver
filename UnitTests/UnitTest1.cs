@@ -1,5 +1,4 @@
-﻿using System;
-using BoardModel;
+﻿using BoardModel;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -11,7 +10,7 @@ namespace UnitTests
         [TestMethod]
         public void When_MovingZeroInBoardInAllDirections_ShouldBeOk()
         {
-            byte[,] testBytes = {{1, 2, 3, 4}, {5, 6, 0, 8}, {9, 10, 12, 13}, {14, 15, 16, 17}};
+            byte[,] testBytes = { { 1, 2, 3, 4 }, { 5, 6, 0, 8 }, { 9, 10, 12, 13 }, { 14, 15, 16, 17 } };
             Board testBoard = new Board(4, 4, testBytes);
 
             byte[,] expectedBytesUp = { { 1, 2, 0, 4 }, { 5, 6, 3, 8 }, { 9, 10, 12, 13 }, { 14, 15, 16, 17 } };
@@ -35,7 +34,7 @@ namespace UnitTests
         [TestMethod]
         public void When_BoardIsSolved_ShouldBeOk()
         {
-            byte[,] expectedBytes = { { 1, 2, 3, 4}, { 5, 6, 7, 8}, { 9, 10, 11, 12}, { 13, 14, 15, 0} };
+            byte[,] expectedBytes = { { 1, 2, 3, 4 }, { 5, 6, 7, 8 }, { 9, 10, 11, 12 }, { 13, 14, 15, 0 } };
             Board actualSolvedBoard = new Board(4, 4, expectedBytes);
 
             actualSolvedBoard.IsSolved().Should().BeTrue();

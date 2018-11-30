@@ -1,18 +1,13 @@
-﻿using System;
+﻿using BoardModel;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using BoardModel;
-using DataHandler;
-using FifteenSolvers.Comparer;
 
 namespace FifteenSolvers.Solvers
 {
     public class DFSSolver : BaseSolver
     {
         public Stack<Board> BoardsStack { get; set; } = new Stack<Board>();
+
         public DFSSolver(MoveEnum[] moveOrder)
         {
             MoveOrder = moveOrder.Reverse().ToArray();
@@ -20,7 +15,6 @@ namespace FifteenSolvers.Solvers
 
         public override void InitializeChildrenBoards(Board currentBoard)
         {
-            //smaller than because in TreeDepth first Null is counted
             if (currentBoard.TreeDepth >= 20)
             {
                 return;
@@ -53,12 +47,6 @@ namespace FifteenSolvers.Solvers
         {
             CurrentBoard = initialBoard;
             BoardsStack.Push(CurrentBoard);
-           // HashedBoardsSet.Add(InitBoard);
-        }
-
-        public override bool IsContainerEmpty()
-        {
-            return (BoardsStack.Count == 0);
         }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.IO;
 
 namespace DataHandler
 {
@@ -11,7 +6,6 @@ namespace DataHandler
     {
         public static void SaveText(string dataToSave, string filePath)
         {
-            //File.Delete(filePath);
             using (StreamWriter sW = File.AppendText(filePath))
             {
                 sW.Write(dataToSave);

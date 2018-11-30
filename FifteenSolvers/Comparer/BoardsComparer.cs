@@ -1,10 +1,5 @@
-﻿using System;
+﻿using BoardModel;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using System.Threading.Tasks;
-using BoardModel;
 
 namespace FifteenSolvers.Comparer
 {
@@ -32,42 +27,20 @@ namespace FifteenSolvers.Comparer
             byte[,] state = obj.BoardInstance;
             if (state == null) return 0;
             if (state.Length == 0) return -1;
-            //unchecked
-            //{
-            //    const int p = 16777619;
-            //    int hash = (int)2166136261;
-
-            //    for (int i = 0; i < state.GetLength(0); i++)
-            //    {
-            //        for (int j = 0; j < state.GetLength(1); j++)
-            //        {
-            //            hash = (hash ^ state[i, j] ^ i ^ j) * p;
-            //        }
-            //    }
-
-            //    hash += hash << 13;
-            //    hash ^= hash >> 7;
-            //    hash += hash << 3;
-            //    hash ^= hash >> 17;
-            //    hash += hash << 5;
-
-            //    return hash;
-            //}
 
             unchecked
             {
-                // Choose large primes to avoid hashing collisions
-                const int HashingBase = (int)2166136261;
-                const int HashingMultiplier = 16777619;
+                const int hashingBase = (int)2166136261;
+                const int hashingMultiplier = 16777619;
 
-                int hash = HashingBase;
-                hash = (hash * HashingMultiplier) ^ (!Object.ReferenceEquals(null, obj) ? obj.GetHashCode() : 0);
+                int hash = hashingBase;
+                hash = (hash * hashingMultiplier) ^ (obj.GetHashCode());
 
                 for (int i = 0; i < state.GetLength(0); i++)
                 {
                     for (int j = 0; j < state.GetLength(1); j++)
                     {
-                        hash = (hash ^ state[i, j] ^ i ^ j) * HashingBase;
+                        hash = (hash ^ state[i, j] ^ i ^ j) * hashingBase;
                     }
                 }
                 return hash;
