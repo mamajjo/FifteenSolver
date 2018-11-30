@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Priority Queue, Version=4.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\OptimizedPriorityQueue.4.2.0\lib\net45\Priority Queue.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -41,10 +44,26 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="BaseSolver.cs" />
+    <Compile Include="Comparer\BoardsComparer.cs" />
+    <Compile Include="Solvers\HammingSolver.cs" />
+    <Compile Include="Solvers\ManhattanSolver.cs" />
+    <Compile Include="Solvers\BFSSolver.cs" />
+    <Compile Include="Solvers\DFSSolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Solvers\ISolver.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\BoardModel\BoardModel.csproj">
+      <Project>{B4456C7B-6A38-4408-83D1-4EA6D285DFE1}</Project>
+      <Name>BoardModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataHandler\DataHandler.csproj">
+      <Project>{CBB7465E-8DB0-4D8D-9243-2536A702C825}</Project>
+      <Name>DataHandler</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

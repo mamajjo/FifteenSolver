@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BoardModel;
+using System;
 using System.IO;
 
 namespace DataHandler
 {
-    //klasa do wczytywaniu z pliku po podaniu ścieżki do niej
-    //klasa układanki i jej stanu string[w][k]
     public class DataLoader
     {
-        public static BoardData LoadDataFromFile(string path)
+        public static Board LoadDataFromFile(string path)
         {
             using (StreamReader sr = new StreamReader(path))
             {
@@ -19,7 +14,7 @@ namespace DataHandler
                 string[] parts = temp.Split(' ');
                 byte sizeX = Byte.Parse(parts[0]);
                 byte sizeY = Byte.Parse(parts[1]);
-                byte[,] board =new byte[sizeX, sizeY];
+                byte[,] board = new byte[sizeX, sizeY];
 
                 for (int x = 0; x < sizeX; x++)
                 {
@@ -31,7 +26,7 @@ namespace DataHandler
                     }
                 }
 
-                return new BoardData {Board = board, SizeX = sizeX, SizeY = sizeY};
+                return new Board(sizeX, sizeY, board);
             }
         }
     }

@@ -1,21 +1,48 @@
 ﻿using BoardModel;
 using DataHandler;
-using System;
+using FifteenSolvers;
+using FifteenSolvers.Solvers;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CLIFifteen
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            Board testingBoard = new Board(DataLoader.LoadDataFromFile("C:\\Users\\Maciej\\source\\repos\\FifteenSolver\\UnitTests\\testBoard.txt"));
-            testingBoard.Shift(MoveEnum.D);
-            Console.WriteLine(testingBoard.ToString());
-            Console.Read();
+            InputArgReader inputArgReader = new InputArgReader(args);
+            Board testingBoard = new Board(DataLoader.LoadDataFromFile(inputArgReader.InputBoard), new List<MoveEnum>());
+            MoveEnum[] moveEnums = { MoveEnum.L, MoveEnum.D, MoveEnum.R, MoveEnum.U };
+            BaseSolver solver = null;
+
+            switch (inputArgReader.Algorithm)
+            {
+                case "dfs":
+                    solver = new DFSSolver(inputArgReader.GetMoveEnums());
+                    break;
+
+                case "bfs":
+                    solver = new BFSSolver(inputArgReader.GetMoveEnums());
+                    break;
+
+                case "astr":
+                    switch (inputArgReader.Strategy)
+                    {
+                        case "hamm":
+                            solver = new HammingSolver(moveEnums);
+                            break;
+
+                        case "manh":
+                            solver = new ManhattanSolver(moveEnums);
+                            break;
+                    }
+
+                    break;
+            }
+            solver.InitializeContainers(testingBoard);
+            Board solved = solver.Solve();
+            DataSaver.SaveText(solved.PathToSolutionString(), inputArgReader.OutputBoard);
+            DataSaver.SaveText(solver.InformationToFileBuilder.ToString(), inputArgReader.OutputStats);
         }
     }
 }

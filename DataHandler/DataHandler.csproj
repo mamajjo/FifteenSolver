@@ -41,12 +41,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BoardData.cs" />
     <Compile Include="DataLoader.cs" />
+    <Compile Include="DataSaver.cs" />
+    <Compile Include="InformationStringBuilder.cs" />
+    <Compile Include="InputArgReader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Handlers\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BoardModel\BoardModel.csproj">
+      <Project>{B4456C7B-6A38-4408-83D1-4EA6D285DFE1}</Project>
+      <Name>BoardModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
